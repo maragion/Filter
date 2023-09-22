@@ -6,22 +6,18 @@
   background: #FFF;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.05);
   margin-top: 2rem;
-}
 
-.form__inputs-container {
-  display: flex;
-  padding: 2rem 1.5rem;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
+  &__inputs-container {
+    display: flex;
+    padding: 2rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
 
-.form__input-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.container_wrap {
-  flex-wrap: wrap;
+  &__input-container {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 h3 {
@@ -36,10 +32,6 @@ label {
   font-weight: 700;
   line-height: 1.25rem;
   margin-bottom: .62rem;
-}
-
-mat-icon {
-  font-size: 1.5rem;
 }
 
 .clear {
@@ -59,6 +51,11 @@ input, select {
   border: 1px solid rgba(130, 140, 150, 0.40);
   padding: 12px;
   box-sizing: border-box;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.125rem;
+  font-family: "Moscow Sans", sans-serif;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -75,16 +72,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
 }
 
-
-input[type="date"]::before {
-  content: attr(data-placeholder);
-  width: 100%;
-}
-
 /* hide our custom/fake placeholder text when in focus to show the default
  * 'mm/dd/yyyy' value and when valid to show the users' date of birth value.
  */
-input[type="date"]:focus::before,
-input[type="date"]:valid::before {
-  display: none
-}

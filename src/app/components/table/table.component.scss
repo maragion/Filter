@@ -1,0 +1,29 @@
+.table {
+  background: #FFF;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.05);
+  display: flex;
+  margin-top: 2rem;
+
+  &__header {
+    background: #DA2032;
+    color: #FFFFFF;
+  }
+
+  &__action-btn {
+    color: rgba(40, 40, 40, 1);
+    border-radius: 50%;
+    height: 2.2rem;
+    width: 2.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+
+    &:hover {
+      background-color: #d3d6d7;
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+

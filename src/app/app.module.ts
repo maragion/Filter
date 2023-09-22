@@ -10,12 +10,12 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {HttpClientModule} from "@angular/common/http";
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   declarations: [
     AppComponent,
     FilterComponent,
-    TableComponent,
     AccountsComponent
   ],
   imports: [
@@ -24,7 +24,10 @@ import {HttpClientModule} from "@angular/common/http";
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    TableComponent,
+
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
