@@ -1,0 +1,90 @@
+.form {
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  background: #FFF;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.05);
+  margin-top: 2rem;
+}
+
+.form__inputs-container {
+  display: flex;
+  padding: 2rem 1.5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.form__input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container_wrap {
+  flex-wrap: wrap;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+}
+
+label {
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.25rem;
+  margin-bottom: .62rem;
+}
+
+mat-icon {
+  font-size: 1.5rem;
+}
+
+.clear {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input, select {
+  width: 266px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid rgba(130, 140, 150, 0.40);
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M8 4H4V8H8V4ZM14 4H10V8H14V4ZM16 4H20V8H16V4ZM8 10H4V14H8V10ZM10 10H14V14H10V10ZM8 16H4V20H8V16ZM10 16H14V20H10V16ZM20 10H16V14H20V10Z' fill='%23A2A9B1'/%3E%3C/svg%3E");
+  width: 20px;
+  height: 20px;
+  border-width: thin;
+}
+
+.input {
+  position: relative;
+}
+
+
+input[type="date"]::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+
+/* hide our custom/fake placeholder text when in focus to show the default
+ * 'mm/dd/yyyy' value and when valid to show the users' date of birth value.
+ */
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
+  display: none
+}

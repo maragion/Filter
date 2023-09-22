@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+.my-custom-button {
+  @include mat.button-density(-1);
+}
+
+@font-face {
+  font-family: "Moscow Sans";
+  src: url("./assets/fonts/MoscowSans-Regular.ttf");
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "Moscow Sans", sans-serif; }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 1.5rem;
+}
+
+.container  {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  gap: 1.5rem;
+}
+
+.jc-sb {
+  justify-content: space-between;
+}
