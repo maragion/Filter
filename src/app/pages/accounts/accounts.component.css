@@ -1,5 +1,3 @@
-
-
 .back {
   display: flex;
   align-items: center;
@@ -22,9 +20,11 @@ h2 {
   color: #666F78;
 }
 
-button {
+.button {
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 300;
   line-height: 1.5rem;
 }
+
+/*# sourceMappingURL=accounts.component.css.map */
