@@ -18,10 +18,12 @@
       </button>
     </div>
 
-    <button mat-flat-button color="warn">
+    <button mat-flat-button color="warn" (click)="filter = !filter">
       <span>Фильтр</span>
       <mat-icon>filter_list</mat-icon>
     </button>
   </div>
+
+  <app-filter *ngIf="filter"></app-filter>
 
 </div>

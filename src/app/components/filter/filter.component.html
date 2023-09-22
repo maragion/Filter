@@ -1,1 +1,94 @@
-<p>filter works!</p>
+<form class="form">
+  <h3>Фильтр</h3>
+  <div class="form__inputs-container">
+
+    <div class="container container_wrap">
+
+      <div class="form__input-container">
+        <label>Логин</label>
+        <div class="input">
+          <input placeholder="" type="text">
+          <button class="clear">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M11.9999 1.33331C6.10657 1.33331 1.33325 6.10663 1.33325 12C1.33325 17.8933 6.10657 22.6666 11.9999 22.6666C17.8932 22.6666 22.6665 17.8933 22.6665 12C22.6665 6.10663 17.8932 1.33331 11.9999 1.33331ZM17.3332 15.8266L15.8265 17.3333L11.9999 13.5066L8.17324 17.3333L6.66657 15.8266L10.4932 12L6.66657 8.1733L8.17324 6.66663L11.9999 10.4933L15.8265 6.66663L17.3332 8.1733L13.5066 12L17.3332 15.8266Z"
+                fill="#A2A9B1"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="form__input-container">
+        <label>Телефон</label>
+        <div class="input">
+          <input placeholder="" type="tel">
+          <button class="clear">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M11.9999 1.33331C6.10657 1.33331 1.33325 6.10663 1.33325 12C1.33325 17.8933 6.10657 22.6666 11.9999 22.6666C17.8932 22.6666 22.6665 17.8933 22.6665 12C22.6665 6.10663 17.8932 1.33331 11.9999 1.33331ZM17.3332 15.8266L15.8265 17.3333L11.9999 13.5066L8.17324 17.3333L6.66657 15.8266L10.4932 12L6.66657 8.1733L8.17324 6.66663L11.9999 10.4933L15.8265 6.66663L17.3332 8.1733L13.5066 12L17.3332 15.8266Z"
+                fill="#A2A9B1"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="form__input-container">
+        <label>Дата создания</label>
+        <div class="input date">
+          <input placeholder=" " class="date-input" type="date">
+        </div>
+      </div>
+
+      <div class="form__input-container">
+        <label>Статус</label>
+        <div class="input">
+          <select name="status" id="status">
+            <option value="all">Все</option>
+            <option value="active">Активен</option>
+            <option value="blocked">Заблокирован</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form__input-container">
+        <label>E-mail</label>
+        <div class="input">
+          <input type="email" placeholder="">
+          <button class="clear">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M11.9999 1.33331C6.10657 1.33331 1.33325 6.10663 1.33325 12C1.33325 17.8933 6.10657 22.6666 11.9999 22.6666C17.8932 22.6666 22.6665 17.8933 22.6665 12C22.6665 6.10663 17.8932 1.33331 11.9999 1.33331ZM17.3332 15.8266L15.8265 17.3333L11.9999 13.5066L8.17324 17.3333L6.66657 15.8266L10.4932 12L6.66657 8.1733L8.17324 6.66663L11.9999 10.4933L15.8265 6.66663L17.3332 8.1733L13.5066 12L17.3332 15.8266Z"
+                fill="#A2A9B1"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="form__input-container">
+        <label>Роль</label>
+        <div class="input">
+          <select name="status" id="role">
+            <option value="all">Все</option>
+            <option value="users">Пользователь</option>
+            <option value="admin">Администратор</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form__input-container">
+        <label>Дата изменения</label>
+        <div class="input date">
+          <input placeholder=" " class="date-input" type="date">
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <button mat-flat-button color="warn">Применить</button>
+      <button mat-flat-button color="warn">Отмена</button>
+      <button mat-flat-button color="warn">Сбросить</button>
+    </div>
+  </div>
+
+
+</form>

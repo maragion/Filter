@@ -8,6 +8,7 @@ import { TableComponent } from './components/table/table.component';
 import { AccountsComponent } from './pages/accounts/accounts.component';
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {MatIconModule} from "@angular/material/icon";
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
