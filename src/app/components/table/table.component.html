@@ -1,4 +1,4 @@
-<div class="table" *ngIf="usersData">
+<div class="table" *ngIf="ready">
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Действия</th>
@@ -9,7 +9,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="login">
+    <ng-container matColumnDef="name">
       <th mat-header-cell class="table__header" *matHeaderCellDef>
         <input type="checkbox">
         <span>Логин</span>

@@ -21,7 +21,7 @@
       <div class="form__input-container">
         <label>Телефон</label>
         <div class="input">
-          <input placeholder="" type="tel" id="phone" name="phone" [(ngModel)]="filter.phone">
+          <input placeholder="" type="number" id="phone" name="phone" [(ngModel)]="filter.phone">
           <button class="clear">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -84,7 +84,7 @@
     </div>
 
     <div class="container">
-      <button mat-flat-button color="warn">Применить</button>
+      <button mat-flat-button color="warn" (click)="sendData()">Применить</button>
       <button mat-flat-button color="warn">Отмена</button>
       <button mat-flat-button color="warn">Сбросить</button>
     </div>

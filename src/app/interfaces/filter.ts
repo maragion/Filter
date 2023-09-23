@@ -4,6 +4,6 @@ export interface Filter {
   "phone": number,
   "create_at": number,
   "update_at": number,
-  "is_admin": boolean,
+  "is_admin": boolean | string,
   "status": string
 }
