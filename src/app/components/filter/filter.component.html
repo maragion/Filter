@@ -7,7 +7,7 @@
       <div class="form__input-container">
         <label>Логин</label>
         <div class="input">
-          <input placeholder="" type="text">
+          <input placeholder="" type="text" id="name" name="name" [(ngModel)]="filter.name">
           <button class="clear">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -21,7 +21,7 @@
       <div class="form__input-container">
         <label>Телефон</label>
         <div class="input">
-          <input placeholder="" type="tel">
+          <input placeholder="" type="tel" id="phone" name="phone" [(ngModel)]="filter.phone">
           <button class="clear">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -35,17 +35,17 @@
       <div class="form__input-container">
         <label>Дата создания</label>
         <div class="input date">
-          <input placeholder=" " class="date-input" type="date">
+          <input placeholder=" " class="date-input" type="date" id="create_at" name="create_at" [(ngModel)]="filter.create_at">
         </div>
       </div>
 
       <div class="form__input-container">
         <label>Статус</label>
         <div class="input">
-          <select name="status" id="status">
+          <select id="status" name="status" [(ngModel)]="filter.status">
             <option value="all">Все</option>
-            <option value="active">Активен</option>
-            <option value="blocked">Заблокирован</option>
+            <option value="ACTIVE">Активен</option>
+            <option value="BLOCKED">Заблокирован</option>
           </select>
         </div>
       </div>
@@ -53,7 +53,7 @@
       <div class="form__input-container">
         <label>E-mail</label>
         <div class="input">
-          <input type="email" placeholder="">
+          <input type="email" placeholder="" id="email" name="email" [(ngModel)]="filter.email">
           <button class="clear">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -67,10 +67,10 @@
       <div class="form__input-container">
         <label>Роль</label>
         <div class="input">
-          <select name="status" id="role">
+          <select id="is_admin" name="is_admin" [(ngModel)]="filter.is_admin" >
             <option value="all">Все</option>
-            <option value="users">Пользователь</option>
-            <option value="admin">Администратор</option>
+            <option [ngValue]=false>Пользователь</option>
+            <option [ngValue]=true>Администратор</option>
           </select>
         </div>
       </div>
@@ -78,7 +78,7 @@
       <div class="form__input-container">
         <label>Дата изменения</label>
         <div class="input date">
-          <input placeholder=" " class="date-input" type="date">
+          <input placeholder=" " class="date-input" type="date" id="update_at" name="update_at" [(ngModel)]="filter.update_at">
         </div>
       </div>
     </div>
