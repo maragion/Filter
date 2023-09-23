@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+// import {Filter} from "../../interfaces/filter";
+import {DataService} from "../../services/data.service";
 import {Filter} from "../../interfaces/filter";
 
 @Component({
@@ -8,14 +10,20 @@ import {Filter} from "../../interfaces/filter";
 })
 export class FilterComponent {
 
+  constructor(private dataService: DataService) {}
 
-  filter: Filter = {
+
+  filter:Filter = {
     "name": "",
     "email": "",
     "phone": 0,
     "create_at": 0,
     "update_at": 0,
-    "is_admin": false,
-    "status": ""
+    "is_admin": "all",
+    "status": "all"
+  }
+
+  sendData() {
+    this.dataService.setData(this.filter);
   }
 }
