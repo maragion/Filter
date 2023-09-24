@@ -13,6 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatTableModule} from "@angular/material/table";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {DatePipe} from "@angular/common";
     MatInputModule,
     HttpClientModule,
     TableComponent,
-
+    MatPaginatorModule,
     MatTableModule,
     ReactiveFormsModule,
     FormsModule
