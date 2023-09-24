@@ -11,6 +11,12 @@ export class DataService {
 
   filters$ = this.filtersSubject.asObservable();
 
+  private filterHideSubject = new BehaviorSubject<boolean>(false);
+  filterValue$ = this.filterHideSubject.asObservable();
+
+  updateValue(newValue: boolean) {
+    this.filterHideSubject.next(newValue);
+  }
   setFilters(filters: any) {
     this.filtersSubject.next(filters);
   }

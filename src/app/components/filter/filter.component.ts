@@ -52,4 +52,8 @@ export class FilterComponent {
     console.log('фильтры', filters)
   }
 
+  updateFilterValue() {
+    this.dataService.updateValue(false);
+  }
+
 }

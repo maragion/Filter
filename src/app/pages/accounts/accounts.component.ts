@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {DataService} from "../../services/data.service";
 
 @Component({
   selector: 'app-accounts',
@@ -8,4 +9,11 @@ import { Component } from '@angular/core';
 export class AccountsComponent {
 
   filter:boolean = false;
+
+  constructor(private dataService: DataService) {
+    this.dataService.filterValue$.subscribe(value => {
+      this.filter = value
+    });
+  }
+
 }
