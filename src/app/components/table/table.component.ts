@@ -8,13 +8,16 @@ import {Data} from "../../interfaces/data";
 import {FinalUser} from "../../interfaces/final-user";
 import {DataService} from "../../services/data.service";
 import {Filter} from "../../interfaces/filter";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {SelectionModel} from "@angular/cdk/collections";
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
   standalone: true,
-  imports: [MatTableModule, MatIconModule, NgClass, MatButtonModule, NgIf, DatePipe],
+  imports: [MatTableModule, MatIconModule, NgClass, MatButtonModule, NgIf, DatePipe, MatPaginatorModule, MatCheckboxModule],
 })
 export class TableComponent implements OnInit {
 
@@ -24,7 +27,7 @@ export class TableComponent implements OnInit {
   dataSource = new MatTableDataSource<FinalUser>();
 
   sortedData: FinalUser[] = [];
-  usersFinal: FinalUser[] = []
+  usersFinal: FinalUser[] = [];
 
 
   ngOnInit() {
@@ -84,6 +87,37 @@ export class TableComponent implements OnInit {
 
 
   displayedColumns: string[] = ['actions', 'name', 'email', 'phone', "is_admin", "update_at", "create_at", "status", "is_ecp"];
+
+
+
+  selection = new SelectionModel<any>(true, []);
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(user?: FinalUser[]): string {
+    if (!user) {
+      // console.log("row", row)
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    // console.log(user, "хуюзер")
+    return `${this.selection.isSelected(user) ? 'deselect' : 'select'} row ${user}`;
+  }
 }
 
 
