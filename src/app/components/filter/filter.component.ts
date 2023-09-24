@@ -56,4 +56,18 @@ export class FilterComponent {
     this.dataService.updateValue(false);
   }
 
+  clearField(value: string) {
+    console.log(value)
+    switch (value) {
+      case 'name':
+        this.name = '';
+        break;
+      case 'email':
+        this.email = '';
+        break;
+      case 'phone':
+        this.phone = '';
+        break;
+    }
+  }
 }
