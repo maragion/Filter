@@ -34,4 +34,22 @@ export class FilterComponent {
     this.dataService.setFilters(filters);
     console.log('фильтры', filters)
   }
+
+
+  resetFilters() {
+
+    const filters = {
+      name: '',
+      email: '',
+      phone: '',
+      is_admin: "all",
+      update_at: "",
+      create_at: "",
+      status: 'all',
+    };
+
+    this.dataService.setFilters(filters);
+    console.log('фильтры', filters)
+  }
+
 }
