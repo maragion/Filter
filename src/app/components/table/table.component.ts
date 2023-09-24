@@ -8,7 +8,6 @@ import {Data} from "../../interfaces/data";
 import {FinalUser} from "../../interfaces/final-user";
 import {DataService} from "../../services/data.service";
 import {Filter} from "../../interfaces/filter";
-import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-table',
@@ -19,92 +18,72 @@ import {map} from "rxjs/operators";
 })
 export class TableComponent implements OnInit {
 
-  constructor(private http: HttpService, private data: DataService) {
+  constructor(private http: HttpService, private data: DataService, private date: DatePipe) {
   }
 
   dataSource = new MatTableDataSource<FinalUser>();
 
-
-  usersFinal: FinalUser[] = []
-  filter: Filter = {
-    "name": "",
-    "email": "",
-    "phone": 0,
-    "create_at": 0,
-    "update_at": 0,
-    "is_admin": "all",
-    "status": "all"};
-  ready: boolean = false;
-
   sortedData: FinalUser[] = [];
+  usersFinal: FinalUser[] = []
+
 
   ngOnInit() {
-    this.http.getData().pipe(
-      map((data: Data) => {
-          data.users.forEach((user) => {
-            data.data.forEach((userData) => {
-              if (user.id === userData.user_id) {
-                this.usersFinal.push({...user, ...userData})
-              }
-            })
+    this.loadData();
 
-          })
-          this.ready = true;
-          this.dataSource = new MatTableDataSource(this.usersFinal);
-          console.log(this.usersFinal)
-        }
-      )).subscribe();
 
-    this.data.data$.subscribe((data: Filter) => {
-      this.filter = data
-      this.sortedData = this.usersFinal.filter((item) => {
-
-        if (this.filter.name && item.name !== this.filter.name) {
-          return false;
-        }
-
-        if (this.filter.email && item.email !== this.filter.email) {
-          return false;
-        }
-
-        if (this.filter.phone && item.phone !== this.filter.phone) {
-          return false;
-        }
-
-        if (this.filter.create_at && item.create_at !== this.filter.create_at) {
-          return false;
-        }
-
-        if (this.filter.update_at && item.update_at !== this.filter.update_at) {
-          return false;
-        }
-
-        if (
-          this.filter.is_admin !== "all" &&
-          item.is_admin !== this.filter.is_admin
-        ) {
-          return false;
-        }
-
-        if (
-          this.filter.status !== "all" &&
-          item.status !== this.filter.status
-        ) {
-          return false;
-        }
-
-        return true;
-      });
-      console.log(this.filter)
-      console.log(this.sortedData)
-      this.dataSource = new MatTableDataSource(this.sortedData);
+    this.data.filters$.subscribe((filters: Filter) => {
+      this.applyFilters(filters);
     })
   }
 
 
-  // dataSource = this.usersFinal;
-  displayedColumns: string[] = ['actions', 'name', 'email', 'phone', "is_admin", "update_at", "create_at", "status", "is_ecp"];
+  loadData() {
+    this.http.getData().subscribe((data: Data) => {
+      this.mergeUsersData(data);
+    });
 
+  }
+
+  mergeUsersData(data: Data) {
+    data.data.forEach((userData) => {
+      data.users.forEach((user) => {
+        if (user.id === userData.user_id) {
+          this.usersFinal.push({...user, ...userData});
+        }
+      });
+    });
+    this.usersFinal.forEach((user) => {
+      user.create_at = this.date.transform((Number(user.create_at) * 1000), "dd.MM.yyyy")
+      user.update_at = this.date.transform(Number(user.update_at) * 1000, "dd.MM.yyyy")
+    })
+    this.dataSource = new MatTableDataSource(this.usersFinal);
+    console.log(this.usersFinal);
+  }
+
+  applyFilters(filters: Filter) {
+    this.sortedData = this.usersFinal.filter((item) => {
+      return (
+        (!filters.name || item.name === filters.name)
+        &&
+        (!filters.email || item.email.includes(filters.email))
+        &&
+        (!filters.phone || item.phone === (filters.phone))
+        &&
+        (filters.is_admin === "all" || item.is_admin === filters.is_admin)
+        &&
+        (!filters.update_at || item.update_at === filters.update_at)
+        &&
+        (!filters.create_at || item.create_at === filters.create_at)
+        &&
+        (filters.status === "all" || item.status === (filters.status))
+      );
+    });
+    this.dataSource.data = this.sortedData;
+    console.log("applyFilters", this.sortedData, filters)
+  }
+
+
+  displayedColumns: string[] = ['actions', 'name', 'email', 'phone', "is_admin", "update_at", "create_at", "status", "is_ecp"];
 }
 
 

@@ -7,7 +7,7 @@
       <div class="form__input-container">
         <label>Логин</label>
         <div class="input">
-          <input placeholder="" type="text" id="name" name="name" [(ngModel)]="filter.name">
+          <input placeholder="" type="text" id="name" name="name" [(ngModel)]="name">
           <button class="clear">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -21,7 +21,7 @@
       <div class="form__input-container">
         <label>Телефон</label>
         <div class="input">
-          <input placeholder="" type="number" id="phone" name="phone" [(ngModel)]="filter.phone">
+          <input placeholder="" type="number" id="phone" name="phone" [(ngModel)]="phone">
           <button class="clear">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -35,14 +35,14 @@
       <div class="form__input-container">
         <label>Дата создания</label>
         <div class="input date">
-          <input placeholder=" " class="date-input" type="date" id="create_at" name="create_at" [(ngModel)]="filter.create_at">
+          <input placeholder=" " class="date-input" type="date" id="create_at" name="create_at" [(ngModel)]="create_at">
         </div>
       </div>
 
       <div class="form__input-container">
         <label>Статус</label>
         <div class="input">
-          <select id="status" name="status" [(ngModel)]="filter.status">
+          <select id="status" name="status" [(ngModel)]="status">
             <option value="all">Все</option>
             <option value="ACTIVE">Активен</option>
             <option value="BLOCKED">Заблокирован</option>
@@ -53,7 +53,7 @@
       <div class="form__input-container">
         <label>E-mail</label>
         <div class="input">
-          <input type="email" placeholder="" id="email" name="email" [(ngModel)]="filter.email">
+          <input type="email" placeholder="" id="email" name="email" [(ngModel)]="email">
           <button class="clear">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -67,7 +67,7 @@
       <div class="form__input-container">
         <label>Роль</label>
         <div class="input">
-          <select id="is_admin" name="is_admin" [(ngModel)]="filter.is_admin" >
+          <select id="is_admin" name="is_admin" [(ngModel)]="is_admin">
             <option value="all">Все</option>
             <option [ngValue]=false>Пользователь</option>
             <option [ngValue]=true>Администратор</option>
@@ -78,13 +78,13 @@
       <div class="form__input-container">
         <label>Дата изменения</label>
         <div class="input date">
-          <input placeholder=" " class="date-input" type="date" id="update_at" name="update_at" [(ngModel)]="filter.update_at">
+          <input placeholder=" " class="date-input" type="date" id="update_at" name="update_at" [(ngModel)]="update_at">
         </div>
       </div>
     </div>
 
     <div class="container">
-      <button mat-flat-button color="warn" (click)="sendData()">Применить</button>
+      <button mat-flat-button color="warn" (click)="applyFilters()">Применить</button>
       <button mat-flat-button color="warn">Отмена</button>
       <button mat-flat-button color="warn">Сбросить</button>
     </div>

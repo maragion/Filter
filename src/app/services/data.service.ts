@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-// import {Filter} from "../interfaces/filter";
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +7,11 @@ import {BehaviorSubject} from "rxjs";
 export class DataService {
 
   constructor() { }
+  private filtersSubject = new BehaviorSubject<any>({});
 
-  filter: {} | null = null
+  filters$ = this.filtersSubject.asObservable();
 
-  private dataSubject = new BehaviorSubject<any>(this.filter);
-  public data$ = this.dataSubject.asObservable();
-
-  setData(data: any) {
-    this.dataSubject.next(data);
+  setFilters(filters: any) {
+    this.filtersSubject.next(filters);
   }
 }

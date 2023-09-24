@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-// import {Filter} from "../../interfaces/filter";
 import {DataService} from "../../services/data.service";
-import {Filter} from "../../interfaces/filter";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-filter',
@@ -10,20 +9,29 @@ import {Filter} from "../../interfaces/filter";
 })
 export class FilterComponent {
 
-  constructor(private dataService: DataService) {}
+  name: string = '';
+  email: string = '';
+  phone: string = '';
+  is_admin: boolean | string = "all";
+  update_at: number | string = "";
+  create_at: number | string = "";
+  status: string = 'all';
 
-
-  filter:Filter = {
-    "name": "",
-    "email": "",
-    "phone": 0,
-    "create_at": 0,
-    "update_at": 0,
-    "is_admin": "all",
-    "status": "all"
+  constructor(private dataService: DataService) {
   }
 
-  sendData() {
-    this.dataService.setData(this.filter);
+  applyFilters() {
+    const filters = {
+      name: this.name,
+      email: this.email,
+      phone: this.phone,
+      is_admin: this.is_admin,
+      update_at: new DatePipe("en").transform(this.update_at, "dd.MM.yyyy"),
+      create_at: new DatePipe("en").transform(this.create_at, "dd.MM.yyyy"),
+      status: this.status,
+    };
+
+    this.dataService.setFilters(filters);
+    console.log('фильтры', filters)
   }
 }
