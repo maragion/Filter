@@ -64,30 +64,23 @@ export class TableComponent implements OnInit {
   }
 
   applyFilters(filters: Filter) {
-    this.sortedData = this.usersFinal.filter((item) => {
-      return (
-        (!filters.name || item.name === filters.name)
-        &&
-        (!filters.email || item.email.includes(filters.email))
-        &&
-        (!filters.phone || item.phone === (filters.phone))
-        &&
-        (filters.is_admin === "all" || item.is_admin === filters.is_admin)
-        &&
-        (!filters.update_at || item.update_at === filters.update_at)
-        &&
-        (!filters.create_at || item.create_at === filters.create_at)
-        &&
-        (filters.status === "all" || item.status === (filters.status))
-      );
+    this.sortedData = this.usersFinal.filter(item => {
+      const nameMatch = !filters.name || item.name === filters.name;
+      const emailMatch = !filters.email || item.email.includes(filters.email);
+      const phoneMatch = !filters.phone || item.phone === filters.phone;
+      const isAdminMatch = filters.is_admin === "all" || item.is_admin === filters.is_admin;
+      const updateAtMatch = !filters.update_at || item.update_at === filters.update_at;
+      const createAtMatch = !filters.create_at || item.create_at === filters.create_at;
+      const statusMatch = filters.status === "all" || item.status === filters.status;
+
+      return nameMatch && emailMatch && phoneMatch && isAdminMatch && updateAtMatch && createAtMatch && statusMatch;
     });
+
     this.dataSource.data = this.sortedData;
-    console.log("applyFilters", this.sortedData, filters)
   }
 
 
   displayedColumns: string[] = ['actions', 'name', 'email', 'phone', "is_admin", "update_at", "create_at", "status", "is_ecp"];
-
 
 
   selection = new SelectionModel<any>(true, []);
@@ -105,7 +98,6 @@ export class TableComponent implements OnInit {
       this.selection.clear();
       return;
     }
-
     this.selection.select(...this.dataSource.data);
   }
 
@@ -115,7 +107,6 @@ export class TableComponent implements OnInit {
       // console.log("row", row)
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    // console.log(user, "хуюзер")
     return `${this.selection.isSelected(user) ? 'deselect' : 'select'} row ${user}`;
   }
 }

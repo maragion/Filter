@@ -1,13 +1,13 @@
-<form class="form">
+<form class="form" [formGroup]="filterForm">
   <h3>Фильтр</h3>
   <div class="form__inputs-container">
 
     <div class="container container_wrap">
 
       <div class="form__input-container">
-        <label>Логин</label>
+        <label for="name">Логин</label>
         <div class="input">
-          <input placeholder="" type="text" id="name" name="name" [(ngModel)]="name">
+          <input placeholder="" type="text" id="name" name="name" formControlName="name">
           <button class="clear" (click)="clearField('name')">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -19,9 +19,9 @@
       </div>
 
       <div class="form__input-container">
-        <label>Телефон</label>
+        <label for="phone">Телефон</label>
         <div class="input">
-          <input placeholder="" type="number" id="phone" name="phone" [(ngModel)]="phone">
+          <input placeholder="" type="number" id="phone" name="phone" formControlName="phone">
           <button class="clear" (click)="clearField('phone')">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -33,16 +33,17 @@
       </div>
 
       <div class="form__input-container">
-        <label>Дата создания</label>
+        <label for="create_at">Дата создания</label>
         <div class="input date">
-          <input placeholder=" " class="date-input" type="date" id="create_at" name="create_at" [(ngModel)]="create_at">
+          <input placeholder=" " class="date-input" type="date" id="create_at" name="create_at"
+                 formControlName="create_at">
         </div>
       </div>
 
       <div class="form__input-container">
-        <label>Статус</label>
+        <label for="status">Статус</label>
         <div class="input">
-          <select id="status" name="status" [(ngModel)]="status">
+          <select id="status" name="status" formControlName="status">
             <option value="all">Все</option>
             <option value="ACTIVE">Активен</option>
             <option value="BLOCKED">Заблокирован</option>
@@ -51,9 +52,9 @@
       </div>
 
       <div class="form__input-container">
-        <label>E-mail</label>
+        <label for="email">E-mail</label>
         <div class="input">
-          <input type="email" placeholder="" id="email" name="email" [(ngModel)]="email">
+          <input type="email" placeholder="" id="email" name="email" formControlName="email">
           <button class="clear" (click)="clearField('email')">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -65,9 +66,9 @@
       </div>
 
       <div class="form__input-container">
-        <label>Роль</label>
+        <label for="is_admin">Роль</label>
         <div class="input">
-          <select id="is_admin" name="is_admin" [(ngModel)]="is_admin">
+          <select id="is_admin" name="is_admin" formControlName="is_admin">
             <option value="all">Все</option>
             <option [ngValue]=false>Пользователь</option>
             <option [ngValue]=true>Администратор</option>
@@ -76,9 +77,10 @@
       </div>
 
       <div class="form__input-container">
-        <label>Дата изменения</label>
+        <label for="update_at">Дата изменения</label>
         <div class="input date">
-          <input placeholder=" " class="date-input" type="date" id="update_at" name="update_at" [(ngModel)]="update_at">
+          <input placeholder="" class="date-input" type="date" id="update_at" name="update_at"
+                 formControlName="update_at">
         </div>
       </div>
     </div>
@@ -89,5 +91,4 @@
       <button mat-flat-button color="warn" (click)="resetFilters()">Сбросить</button>
     </div>
   </div>
-
 </form>
