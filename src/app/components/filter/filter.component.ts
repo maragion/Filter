@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {DatePipe} from "@angular/common";
+import {FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'app-filter',
@@ -9,65 +10,56 @@ import {DatePipe} from "@angular/common";
 })
 export class FilterComponent {
 
-  name: string = '';
-  email: string = '';
-  phone: string = '';
-  is_admin: boolean | string = "all";
-  update_at: number | string = "";
-  create_at: number | string = "";
-  status: string = 'all';
+  constructor(private dataService: DataService, private fb: FormBuilder) {
+  }
 
-  constructor(private dataService: DataService) {
+  filterForm = this.fb.group({
+    name: [""],
+    email: [""],
+    phone: [""],
+    is_admin: ["all"],
+    update_at: [""],
+    create_at: [""],
+    status: ["all"],
+  })
+
+  getFilters() {
+    return {
+      name: this.filterForm.value.name,
+      email: this.filterForm.value.email,
+      phone: this.filterForm.value.phone,
+      is_admin: this.filterForm.value.is_admin,
+      update_at: new DatePipe("en").transform(this.filterForm.value.update_at, "dd.MM.yyyy"),
+      create_at: new DatePipe("en").transform(this.filterForm.value.create_at, "dd.MM.yyyy"),
+      status: this.filterForm.value.status,
+    }
   }
 
   applyFilters() {
-    const filters = {
-      name: this.name,
-      email: this.email,
-      phone: this.phone,
-      is_admin: this.is_admin,
-      update_at: new DatePipe("en").transform(this.update_at, "dd.MM.yyyy"),
-      create_at: new DatePipe("en").transform(this.create_at, "dd.MM.yyyy"),
-      status: this.status,
-    };
-
+    let filters = this.getFilters()
     this.dataService.setFilters(filters);
-    console.log('фильтры', filters)
   }
 
-
   resetFilters() {
-
-    const filters = {
-      name: '',
-      email: '',
-      phone: '',
+    this.filterForm.reset({
+      name: "",
+      email: "",
+      phone: "",
       is_admin: "all",
       update_at: "",
       create_at: "",
-      status: 'all',
-    };
+      status: "all"
+    });
 
+    let filters = this.getFilters()
     this.dataService.setFilters(filters);
-    console.log('фильтры', filters)
   }
 
   updateFilterValue() {
     this.dataService.updateValue(false);
   }
 
-  clearField(value: string) {
-    console.log(value)
-    switch (value) {
-      case 'name':
-        this.name = '';
-        break;
-      case 'email':
-        this.email = '';
-        break;
-      case 'phone':
-        this.phone = '';
-        break;
-    }
+  clearField(field: string) {
+    this.filterForm.get(field)?.reset();
   }
 }
