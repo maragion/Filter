@@ -7,7 +7,9 @@ import {LocalDAta} from "../interfaces/local-data";
 })
 export class DataService {
 
-  constructor() { }
+  constructor() {
+  }
+
   private filtersSubject = new BehaviorSubject<any>({});
 
   filters$ = this.filtersSubject.asObservable();
@@ -20,12 +22,12 @@ export class DataService {
   changeFilterState(newValue: boolean) {
     this.controlFilter.set(newValue)
   }
+
   setFilters(filters: any) {
     this.filtersSubject.next(filters);
   }
 
   usersToChange = signal<LocalDAta[]>([])
-
 
 
 }
