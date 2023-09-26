@@ -55,8 +55,8 @@ export class FilterComponent {
     this.dataService.setFilters(filters);
   }
 
-  updateFilterValue() {
-    this.dataService.updateValue(false);
+  changeFilterState() {
+    this.dataService.changeFilterState(false);
   }
 
   clearField(field: string) {

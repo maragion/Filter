@@ -7,27 +7,27 @@
 
   <div class="container jc-sb">
     <div class="container">
-      <button mat-flat-button color="warn">
+      <button mat-flat-button color="warn" (click)="clearLocal()">
         <span>Добавить</span>
         <mat-icon>add_circle_outline</mat-icon>
       </button>
-      <button mat-flat-button color="warn">
+      <button mat-flat-button color="warn" (click)="unblockUser()">
         <span>Разблокировать</span>
         <mat-icon>check_circle_outline</mat-icon>
       </button>
-      <button mat-flat-button color="warn">
+      <button mat-flat-button color="warn" (click)="blockUser()">
         <span>Заблокировать</span>
         <mat-icon>highlight_off</mat-icon>
       </button>
     </div>
 
-    <button mat-flat-button color="warn" (click)="filter = !filter">
+    <button mat-flat-button color="warn" (click)="controlFilter()">
       <span>Фильтр</span>
       <mat-icon>filter_list</mat-icon>
     </button>
   </div>
 
-  <app-filter *ngIf="filter"></app-filter>
+  <app-filter *ngIf="filter()"></app-filter>
 
   <app-table></app-table>
 

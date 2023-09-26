@@ -9,8 +9,10 @@ import {FinalUser} from "../../interfaces/final-user";
 import {DataService} from "../../services/data.service";
 import {Filter} from "../../interfaces/filter";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatCheckboxChange, MatCheckboxModule} from "@angular/material/checkbox";
 import {SelectionModel} from "@angular/cdk/collections";
+import {LocalStorageService} from "../../services/local-storage.service";
+import {LocalDAta} from "../../interfaces/local-data";
 
 @Component({
   selector: 'app-table',
@@ -21,30 +23,34 @@ import {SelectionModel} from "@angular/cdk/collections";
 })
 export class TableComponent implements OnInit {
 
-  constructor(private http: HttpService, private data: DataService, private date: DatePipe) {
+  constructor(private http: HttpService,
+              private data: DataService,
+              private date: DatePipe,
+              private local: LocalStorageService) {
   }
 
   dataSource = new MatTableDataSource<FinalUser>();
-
   sortedData: FinalUser[] = [];
   usersFinal: FinalUser[] = [];
-
+  usersLocal: LocalDAta[] = this.local.getItem("users")
+  displayedColumns: string[] = ['actions', 'name', 'email', 'phone', "is_admin", "update_at", "create_at", "status", "is_ecp"];
+  selection = new SelectionModel<any>(true, []);
+  selectedUsers: LocalDAta[] = []
 
   ngOnInit() {
     this.loadData();
-
-
     this.data.filters$.subscribe((filters: Filter) => {
       this.applyFilters(filters);
     })
   }
 
-
   loadData() {
     this.http.getData().subscribe((data: Data) => {
       this.mergeUsersData(data);
+      this.usersToLocal();
+      this.remapData();
+      this.setDataSource(this.usersFinal);
     });
-
   }
 
   mergeUsersData(data: Data) {
@@ -55,12 +61,27 @@ export class TableComponent implements OnInit {
         }
       });
     });
+  }
+
+  remapData() {
     this.usersFinal.forEach((user) => {
       user.create_at = this.date.transform((Number(user.create_at) * 1000), "dd.MM.yyyy")
       user.update_at = this.date.transform(Number(user.update_at) * 1000, "dd.MM.yyyy")
     })
-    this.dataSource = new MatTableDataSource(this.usersFinal);
-    console.log(this.usersFinal);
+    if (this.usersLocal) {
+      console.log("remap")
+      this.usersFinal.map(user => {
+        this.usersLocal.forEach((u: any) => {
+          if (u.id === user.id && u.is_admin === user.is_admin) {
+            user.status = u.status
+          }
+        })
+      })
+    }
+  }
+
+  setDataSource(arr: FinalUser[]) {
+    this.dataSource.data = arr
   }
 
   applyFilters(filters: Filter) {
@@ -75,24 +96,15 @@ export class TableComponent implements OnInit {
 
       return nameMatch && emailMatch && phoneMatch && isAdminMatch && updateAtMatch && createAtMatch && statusMatch;
     });
-
-    this.dataSource.data = this.sortedData;
+    this.setDataSource(this.sortedData)
   }
 
-
-  displayedColumns: string[] = ['actions', 'name', 'email', 'phone', "is_admin", "update_at", "create_at", "status", "is_ecp"];
-
-
-  selection = new SelectionModel<any>(true, []);
-
-  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -101,13 +113,30 @@ export class TableComponent implements OnInit {
     this.selection.select(...this.dataSource.data);
   }
 
-  /** The label for the checkbox on the passed row */
-  checkboxLabel(user?: FinalUser[]): string {
-    if (!user) {
-      // console.log("row", row)
-      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+  usersToLocal() {
+    if (!this.usersLocal) {
+      const users: {}[] = []
+      this.usersFinal.forEach(user => {
+        users.push({id: user.id, is_admin: user.is_admin, status: user.status})
+      })
+      this.local.setItem("users", users)
+      console.log(this.local.getItem("users"), "in Local")
     }
-    return `${this.selection.isSelected(user) ? 'deselect' : 'select'} row ${user}`;
+  }
+
+  onChange(event: MatCheckboxChange, user: FinalUser) {
+    if (event.checked) {
+      this.selectedUsers.push({
+        id: user.id,
+        is_admin: user.is_admin,
+        status: user.status
+      })
+    } else if (!event.checked) {
+      let idx = this.selectedUsers.findIndex((value: any) => value.id === user.id && value.is_admin === user.is_admin)
+      this.selectedUsers.splice(idx, 1)
+    }
+    this.data.selectedUsers.set(this.selectedUsers)
+    console.log(this.data.selectedUsers(), "signal")
   }
 }
 
