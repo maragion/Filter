@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
+import {LocalDAta} from "../interfaces/local-data";
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +12,20 @@ export class DataService {
 
   filters$ = this.filtersSubject.asObservable();
 
-  private filterHideSubject = new BehaviorSubject<boolean>(false);
-  filterValue$ = this.filterHideSubject.asObservable();
 
-  updateValue(newValue: boolean) {
-    this.filterHideSubject.next(newValue);
+  controlFilter = signal(false)
+  selectedUsers = signal<LocalDAta[]>([])
+
+
+  changeFilterState(newValue: boolean) {
+    this.controlFilter.set(newValue)
   }
   setFilters(filters: any) {
     this.filtersSubject.next(filters);
   }
+
+  usersToChange = signal<LocalDAta[]>([])
+
+
+
 }
