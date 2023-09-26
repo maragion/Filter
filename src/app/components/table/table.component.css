@@ -3,6 +3,7 @@
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.05);
   display: flex;
   margin-top: 2rem;
+  flex-direction: column;
 }
 .table__header {
   background: #DA2032;

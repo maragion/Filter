@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
@@ -8,11 +8,12 @@ import {Data} from "../../interfaces/data";
 import {FinalUser} from "../../interfaces/final-user";
 import {DataService} from "../../services/data.service";
 import {Filter} from "../../interfaces/filter";
-import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxChange, MatCheckboxModule} from "@angular/material/checkbox";
 import {SelectionModel} from "@angular/cdk/collections";
 import {LocalStorageService} from "../../services/local-storage.service";
 import {LocalDAta} from "../../interfaces/local-data";
+import {AppModule} from "../../app.module";
 
 @Component({
   selector: 'app-table',
@@ -21,7 +22,7 @@ import {LocalDAta} from "../../interfaces/local-data";
   standalone: true,
   imports: [MatTableModule, MatIconModule, NgClass, MatButtonModule, NgIf, DatePipe, MatPaginatorModule, MatCheckboxModule],
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements AfterViewInit {
 
   constructor(private http: HttpService,
               private data: DataService,
@@ -36,14 +37,31 @@ export class TableComponent implements OnInit {
   usersLocal: LocalDAta[] = this.local.getItem("users")
   selection = new SelectionModel<any>(true, []);
   selectedUsers: LocalDAta[] = []
+  @ViewChild('paginator') paginator: MatPaginator = <MatPaginator>{};
+  @ViewChild('paginator2') paginator2: MatPaginator = <MatPaginator>{};
+
+
 
   ngOnInit() {
     this.loadData();
     this.data.filters$.subscribe((filters: Filter) => {
       this.applyFilters(filters);
     })
+    this.data.status$.subscribe(data => {
+      this.dataSource.data.map(user => {
+        data.forEach(u => {
+          if (u.id === user.id && u.is_admin === user.is_admin) {
+            user.status = u.status
+          }
+        })
+      })
+    })
   }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator = this.paginator2;
 
+  }
   loadData() {
     this.http.getData().subscribe((data: Data) => {
       this.mergeUsersData(data);
@@ -136,7 +154,6 @@ export class TableComponent implements OnInit {
       this.selectedUsers.splice(idx, 1)
     }
     this.data.selectedUsers.set(this.selectedUsers)
-    console.log(this.data.selectedUsers(), "signal")
   }
 
   selectAll(event: MatCheckboxChange) {
@@ -152,7 +169,6 @@ export class TableComponent implements OnInit {
       this.selectedUsers = []
     }
     this.data.selectedUsers.set(this.selectedUsers)
-    console.log(this.data.selectedUsers(), "signal")
   }
 
 }
