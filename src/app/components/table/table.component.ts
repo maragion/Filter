@@ -30,10 +30,10 @@ export class TableComponent implements OnInit {
   }
 
   dataSource = new MatTableDataSource<FinalUser>();
+  displayedColumns: string[] = ['actions', 'name', 'email', 'phone', "is_admin", "update_at", "create_at", "status", "is_ecp"];
   sortedData: FinalUser[] = [];
   usersFinal: FinalUser[] = [];
   usersLocal: LocalDAta[] = this.local.getItem("users")
-  displayedColumns: string[] = ['actions', 'name', 'email', 'phone', "is_admin", "update_at", "create_at", "status", "is_ecp"];
   selection = new SelectionModel<any>(true, []);
   selectedUsers: LocalDAta[] = []
 
@@ -124,7 +124,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  onChange(event: MatCheckboxChange, user: FinalUser) {
+  selectUser(event: MatCheckboxChange, user: FinalUser) {
     if (event.checked) {
       this.selectedUsers.push({
         id: user.id,
@@ -138,6 +138,23 @@ export class TableComponent implements OnInit {
     this.data.selectedUsers.set(this.selectedUsers)
     console.log(this.data.selectedUsers(), "signal")
   }
+
+  selectAll(event: MatCheckboxChange) {
+    if (event.checked) {
+      this.dataSource.data.forEach(user => {
+        this.selectedUsers.push({
+          id: user.id,
+          is_admin: user.is_admin,
+          status: user.status
+        })
+      })
+    } else if (!event.checked) {
+      this.selectedUsers = []
+    }
+    this.data.selectedUsers.set(this.selectedUsers)
+    console.log(this.data.selectedUsers(), "signal")
+  }
+
 }
 
 

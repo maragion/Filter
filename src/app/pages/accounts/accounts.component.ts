@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import {Component} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {LocalStorageService} from "../../services/local-storage.service";
 
@@ -13,34 +13,20 @@ export class AccountsComponent {
 
 
   constructor(private dataService: DataService, private localStorage: LocalStorageService) {
-
-
   }
 
 
   controlFilter() {
     if (this.filter()) {
       this.dataService.controlFilter.set(false)
-    }else this.dataService.controlFilter.set(true)
-  }
-
-  setItem() {
-    let item = [1, 2, 3]
-    this.localStorage.setItem("arr", JSON.stringify(item))
-  }
-
-  getItem() {
-    let item: any = this.localStorage.getItem("arr")
-    item = JSON.parse(item)
-    console.log(item, typeof item)
-    return  item
+    } else this.dataService.controlFilter.set(true)
   }
 
   selectedUsers = this.dataService.selectedUsers
   usersToCahngeStatus = this.dataService.usersToChange
 
   blockUser() {
-    let localUsers  = this.localStorage.getItem("users")
+    let localUsers = this.localStorage.getItem("users")
 
     console.log(this.selectedUsers(), "block")
     console.log(localUsers, "Localblock")
@@ -54,10 +40,11 @@ export class AccountsComponent {
     })
     console.log("afterBlock", localUsers)
     this.localStorage.setItem("users", localUsers)
+
   }
 
   unblockUser() {
-    let localUsers  = this.localStorage.getItem("users")
+    let localUsers = this.localStorage.getItem("users")
 
 
     console.log(this.selectedUsers(), "unblock")
