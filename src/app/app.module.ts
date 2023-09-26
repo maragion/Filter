@@ -14,12 +14,14 @@ import {MatTableModule} from "@angular/material/table";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import {MatPaginatorModule} from "@angular/material/paginator";
+// import { PaginatorComponent } from './components/table/paginator/paginator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FilterComponent,
     AccountsComponent,
+    // PaginatorComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,9 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     FormsModule
   ],
   providers: [DatePipe],
+  exports: [
+    // PaginatorComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

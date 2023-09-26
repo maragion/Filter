@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {LocalStorageService} from "../../services/local-storage.service";
+import {LocalDAta} from "../../interfaces/local-data";
 
 @Component({
   selector: 'app-accounts',
@@ -8,13 +9,10 @@ import {LocalStorageService} from "../../services/local-storage.service";
   styleUrls: ['./accounts.component.css']
 })
 export class AccountsComponent {
-
   filter = this.dataService.controlFilter;
-
 
   constructor(private dataService: DataService, private localStorage: LocalStorageService) {
   }
-
 
   controlFilter() {
     if (this.filter()) {
@@ -23,31 +21,25 @@ export class AccountsComponent {
   }
 
   selectedUsers = this.dataService.selectedUsers
-  usersToCahngeStatus = this.dataService.usersToChange
+  usersToChangeStatus = this.dataService.usersToChange
 
   blockUser() {
     let localUsers = this.localStorage.getItem("users")
 
-    console.log(this.selectedUsers(), "block")
-    console.log(localUsers, "Localblock")
-    localUsers.map((user: any) => {
-      this.selectedUsers().forEach((u: any) => {
+    localUsers.map((user: LocalDAta) => {
+      this.selectedUsers().forEach((u: LocalDAta) => {
         if (user.id === u.id && user.is_admin == u.is_admin) {
           user.status = "BLOCKED"
-          this.usersToCahngeStatus().push(user)
+          this.usersToChangeStatus().push(user)
         }
       })
     })
-    console.log("afterBlock", localUsers)
     this.localStorage.setItem("users", localUsers)
-
+    this.dataService.changeStatus(localUsers)
   }
 
   unblockUser() {
     let localUsers = this.localStorage.getItem("users")
-
-
-    console.log(this.selectedUsers(), "unblock")
     localUsers.map((user: any) => {
       this.selectedUsers().forEach((u: any) => {
         if (user.id === u.id && user.is_admin == u.is_admin) {
@@ -55,12 +47,11 @@ export class AccountsComponent {
         }
       })
     })
-    console.log("afterBlock", localUsers)
     this.localStorage.setItem("users", localUsers)
+    this.dataService.changeStatus(localUsers)
   }
 
   clearLocal() {
     localStorage.clear()
   }
-
 }

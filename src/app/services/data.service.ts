@@ -1,5 +1,5 @@
 import {Injectable, signal} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {LocalDAta} from "../interfaces/local-data";
 
 @Injectable({
@@ -28,6 +28,13 @@ export class DataService {
   }
 
   usersToChange = signal<LocalDAta[]>([])
+
+  private statusSubject = new Subject<LocalDAta[]>()
+  status$ = this.statusSubject.asObservable()
+  changeStatus(statusData: LocalDAta[]) {
+    this.statusSubject.next(statusData)
+  }
+
 
 
 }
