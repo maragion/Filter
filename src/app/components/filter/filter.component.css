@@ -55,6 +55,9 @@ input, select {
   line-height: 1.125rem;
   font-family: "Moscow Sans", sans-serif;
 }
+input:focus, select:focus {
+  outline: 1px solid rgb(162, 169, 177);
+}
 
 input[type=date]::-webkit-calendar-picker-indicator {
   color: rgba(0, 0, 0, 0);
@@ -70,8 +73,17 @@ input[type=date]::-webkit-calendar-picker-indicator {
   position: relative;
 }
 
-/* hide our custom/fake placeholder text when in focus to show the default
- * 'mm/dd/yyyy' value and when valid to show the users' date of birth value.
- */
+.cancel {
+  color: rgb(162, 169, 177);
+}
+
+input.ng-touched.ng-invalid {
+  border: solid #FF001F 1px;
+  outline: solid #FF001F 1px;
+}
+
+input.ng-touched.ng-invalid + .clear > .cancel {
+  color: #FF001F;
+}
 
 /*# sourceMappingURL=filter.component.css.map */

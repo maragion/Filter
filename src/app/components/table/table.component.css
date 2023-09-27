@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .table {
   background: #FFF;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.05);
@@ -22,6 +21,7 @@
   justify-content: center;
   align-items: center;
   background-color: #FFFFFF;
+  margin: 0 auto;
 }
 .table__action-btn:hover {
   background-color: #d3d6d7;
@@ -60,7 +60,7 @@
   top: 0;
   right: 1.2rem;
   width: 2px;
-  height: 1.5rem; /* Изменено на высоту, соответствующую .customSelect */
+  height: 1.5rem;
   display: block;
   background-color: rgba(130, 140, 150, 0.4);
 }
@@ -72,7 +72,7 @@
   height: 100%;
   outline: none;
   padding: 0.12rem 0.6rem;
-  font-family: Moscow Sans;
+  font-family: Moscow Sans, serif;
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 300;
@@ -85,6 +85,10 @@
 
 .top-border {
   border-top: 0.06rem solid #C4C4C4;
+}
+
+.mdc-data-table__cell, .mat-mdc-header-cell {
+  text-align: center;
 }
 
 /*# sourceMappingURL=table.component.css.map */

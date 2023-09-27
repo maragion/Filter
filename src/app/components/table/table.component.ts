@@ -113,7 +113,7 @@ export class TableComponent implements OnInit {
       const updateAtMatch = !filters.update_at || item.update_at === filters.update_at;
       const createAtMatch = !filters.create_at || item.create_at === filters.create_at;
       const statusMatch = filters.status === "all" || item.status === filters.status;
-
+      console.log(filters.phone)
       return nameMatch && emailMatch && phoneMatch && isAdminMatch && updateAtMatch && createAtMatch && statusMatch;
     });
     this.setDataSource(this.sortedData)
