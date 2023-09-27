@@ -11,6 +11,7 @@ html, body {
 body {
   margin: 0;
   font-family: "Moscow Sans", sans-serif;
+  background-color: #F5F6F7;
 }
 
 .wrapper {
@@ -31,6 +32,14 @@ body {
 
 .jc-sb {
   justify-content: space-between;
+}
+
+.green {
+  color: rgb(37, 181, 83);
+}
+
+.red {
+  color: rgb(255, 0, 31);
 }
 
 /*# sourceMappingURL=styles.css.map */

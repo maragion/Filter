@@ -1,33 +1,34 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit,} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
-import {DatePipe, NgClass, NgIf} from "@angular/common";
+import {DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {Data} from "../../interfaces/data";
 import {FinalUser} from "../../interfaces/final-user";
 import {DataService} from "../../services/data.service";
 import {Filter} from "../../interfaces/filter";
-import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
+import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxChange, MatCheckboxModule} from "@angular/material/checkbox";
 import {SelectionModel} from "@angular/cdk/collections";
 import {LocalStorageService} from "../../services/local-storage.service";
 import {LocalDAta} from "../../interfaces/local-data";
-import {AppModule} from "../../app.module";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
   standalone: true,
-  imports: [MatTableModule, MatIconModule, NgClass, MatButtonModule, NgIf, DatePipe, MatPaginatorModule, MatCheckboxModule],
+  imports: [MatTableModule, MatIconModule, NgClass, MatButtonModule, NgIf, DatePipe, MatPaginatorModule, MatCheckboxModule, FormsModule, NgForOf],
 })
-export class TableComponent implements AfterViewInit {
+export class TableComponent implements OnInit {
 
   constructor(private http: HttpService,
               private data: DataService,
               private date: DatePipe,
-              private local: LocalStorageService) {
+              private local: LocalStorageService,
+  ) {
   }
 
   dataSource = new MatTableDataSource<FinalUser>();
@@ -35,11 +36,8 @@ export class TableComponent implements AfterViewInit {
   sortedData: FinalUser[] = [];
   usersFinal: FinalUser[] = [];
   usersLocal: LocalDAta[] = this.local.getItem("users")
-  selection = new SelectionModel<any>(true, []);
+  selection = new SelectionModel<FinalUser>(true, []);
   selectedUsers: LocalDAta[] = []
-  @ViewChild('paginator') paginator: MatPaginator = <MatPaginator>{};
-  @ViewChild('paginator2') paginator2: MatPaginator = <MatPaginator>{};
-
 
 
   ngOnInit() {
@@ -56,18 +54,23 @@ export class TableComponent implements AfterViewInit {
         })
       })
     })
+    this.data.totalLength.set(this.dataSource.data.length)
   }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.paginator = this.paginator2;
 
-  }
+  showRecordsDefault: number = 10;
+  showRecordsValue: number[] = [5, 10, 20]
+  selectedRecords: number = 0;
+  records: number = this.showRecordsDefault
+  allRecords: number | null = null;
+
+
   loadData() {
     this.http.getData().subscribe((data: Data) => {
       this.mergeUsersData(data);
       this.usersToLocal();
       this.remapData();
       this.setDataSource(this.usersFinal);
+      this.allRecords = this.usersFinal.length
     });
   }
 
@@ -87,7 +90,6 @@ export class TableComponent implements AfterViewInit {
       user.update_at = this.date.transform(Number(user.update_at) * 1000, "dd.MM.yyyy")
     })
     if (this.usersLocal) {
-      console.log("remap")
       this.usersFinal.map(user => {
         this.usersLocal.forEach((u: any) => {
           if (u.id === user.id && u.is_admin === user.is_admin) {
@@ -131,6 +133,7 @@ export class TableComponent implements AfterViewInit {
     this.selection.select(...this.dataSource.data);
   }
 
+
   usersToLocal() {
     if (!this.usersLocal) {
       const users: {}[] = []
@@ -144,20 +147,24 @@ export class TableComponent implements AfterViewInit {
 
   selectUser(event: MatCheckboxChange, user: FinalUser) {
     if (event.checked) {
+      this.selectedRecords += 1;
       this.selectedUsers.push({
         id: user.id,
         is_admin: user.is_admin,
         status: user.status
       })
     } else if (!event.checked) {
+      this.selectedRecords -= 1;
       let idx = this.selectedUsers.findIndex((value: any) => value.id === user.id && value.is_admin === user.is_admin)
       this.selectedUsers.splice(idx, 1)
     }
     this.data.selectedUsers.set(this.selectedUsers)
+    this.data.numberOfSelectedUser.set(this.selectedUsers.length)
   }
 
   selectAll(event: MatCheckboxChange) {
     if (event.checked) {
+      this.selectedRecords = this.dataSource.data.length
       this.dataSource.data.forEach(user => {
         this.selectedUsers.push({
           id: user.id,
@@ -167,6 +174,7 @@ export class TableComponent implements AfterViewInit {
       })
     } else if (!event.checked) {
       this.selectedUsers = []
+      this.selectedRecords = this.selectedUsers.length
     }
     this.data.selectedUsers.set(this.selectedUsers)
   }
