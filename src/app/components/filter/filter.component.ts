@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {DatePipe} from "@angular/common";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-filter',
@@ -14,12 +14,12 @@ export class FilterComponent {
   }
 
   filterForm = this.fb.group({
-    name: [""],
-    email: [""],
-    phone: [""],
+    name: ["", [Validators.pattern("(^$)|(^[A-Za-z0-9]+$)")]],
+    email: ["", Validators.pattern("(^$)|(^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$)")],
+    phone: ["", Validators.pattern("(^$)|(?:\\+|\\d)[\\d\\-\\(\\) ]{9,}\\d")],
     is_admin: ["all"],
-    update_at: [""],
-    create_at: [""],
+    update_at: ["", Validators.pattern('[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])')],
+    create_at: ["", Validators.pattern("[1-9][0-9][0-9]{2}-([0][1-9]|[1][0-2])-([1-2][0-9]|[0][1-9]|[3][0-1])")],
     status: ["all"],
   })
 
@@ -27,7 +27,7 @@ export class FilterComponent {
     return {
       name: this.filterForm.value.name,
       email: this.filterForm.value.email,
-      phone: this.filterForm.value.phone,
+      phone: Number(this.filterForm.value.phone),
       is_admin: this.filterForm.value.is_admin,
       update_at: new DatePipe("en").transform(this.filterForm.value.update_at, "dd.MM.yyyy"),
       create_at: new DatePipe("en").transform(this.filterForm.value.create_at, "dd.MM.yyyy"),
@@ -36,8 +36,11 @@ export class FilterComponent {
   }
 
   applyFilters() {
-    let filters = this.getFilters()
-    this.dataService.setFilters(filters);
+    if (this.filterForm.valid) {
+      let filters = this.getFilters()
+      this.dataService.setFilters(filters);
+      console.log(filters)
+    }else console.log("invalid", this.filterForm.value.update_at)
   }
 
   resetFilters() {

@@ -35,6 +35,7 @@ export class DataService {
     this.statusSubject.next(statusData)
   }
 
-
+  totalLength = signal<number>(0)
+  numberOfSelectedUser = signal<number>(0)
 
 }
