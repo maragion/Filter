@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {DatePipe} from "@angular/common";
 import {FormBuilder, Validators} from "@angular/forms";
-
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -23,11 +22,44 @@ export class FilterComponent {
     status: ["all"],
   })
 
+  extractDigits(inputValue: any) {
+    return inputValue.replace(/\D/g, '');
+  }
+
+  formatPhoneNumber(event: any) {
+    const input = event.target;
+    let value = input.value.replace(/\D/g, '');
+
+    if (value.length > 11) {
+      value = value.substr(0, 11);
+    }
+
+    let formattedValue = '';
+
+    if (value.length >= 0){
+      formattedValue += "+7"
+    }
+    if (value.length >= 2) {
+      formattedValue += '(' + value.slice(1, 4);
+    }
+    if (value.length >= 5) {
+      formattedValue += ')-' + value.slice(4, 7);
+    }
+    if (value.length >= 8) {
+      formattedValue += '-' + value.slice(7, 9);
+    }
+    if (value.length >= 10) {
+      formattedValue += '-' + value.slice(9, 11);    }
+
+    input.value = formattedValue;
+  }
+
+
   getFilters() {
     return {
       name: this.filterForm.value.name,
       email: this.filterForm.value.email,
-      phone: Number(this.filterForm.value.phone),
+      phone: this.extractDigits(this.filterForm.value.phone),
       is_admin: this.filterForm.value.is_admin,
       update_at: new DatePipe("en").transform(this.filterForm.value.update_at, "dd.MM.yyyy"),
       create_at: new DatePipe("en").transform(this.filterForm.value.create_at, "dd.MM.yyyy"),
