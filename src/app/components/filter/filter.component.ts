@@ -59,7 +59,7 @@ export class FilterComponent {
     return {
       name: this.filterForm.value.name,
       email: this.filterForm.value.email,
-      phone: this.extractDigits(this.filterForm.value.phone),
+      phone: Number(this.extractDigits(this.filterForm.value.phone)),
       is_admin: this.filterForm.value.is_admin,
       update_at: new DatePipe("en").transform(this.filterForm.value.update_at, "dd.MM.yyyy"),
       create_at: new DatePipe("en").transform(this.filterForm.value.create_at, "dd.MM.yyyy"),

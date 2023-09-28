@@ -7,23 +7,26 @@
 
   <div class="container jc-sb">
     <div class="container">
-      <button mat-flat-button color="warn" (click)="clearLocal()">
-        <span>Добавить</span>
-        <mat-icon>add_circle_outline</mat-icon>
+
+      <button mat-flat-button color="primary" (click)="clearLocal()">
+        Добавить
+        <mat-icon iconPositionEnd>add_circle_outline</mat-icon>
       </button>
-      <button mat-flat-button color="warn" (click)="unblockUser()">
-        <span>Разблокировать</span>
-        <mat-icon>check_circle_outline</mat-icon>
+
+      <button mat-flat-button color="primary" (click)="unblockUser()">
+        Разблокировать
+        <mat-icon iconPositionEnd>check_circle_outline</mat-icon>
       </button>
-      <button mat-flat-button color="warn" (click)="blockUser()">
-        <span>Заблокировать</span>
-        <mat-icon>highlight_off</mat-icon>
+      <button mat-flat-button color="primary" (click)="blockUser()">
+        Заблокировать
+        <mat-icon iconPositionEnd>highlight_off</mat-icon>
       </button>
     </div>
 
-    <button mat-flat-button color="warn" (click)="controlFilter()">
-      <span>Фильтр</span>
+    <button mat-flat-button color="accent" [disabled]="filter()" (click)="controlFilter()">
       <mat-icon>filter_list</mat-icon>
+      <span>Фильтр</span>
+
     </button>
   </div>
 
