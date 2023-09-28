@@ -34,6 +34,13 @@ body {
   justify-content: space-between;
 }
 
+.custom-button {
+  padding: 1rem 0.1rem;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 300;
+}
+
 .green {
   color: rgb(37, 181, 83);
 }
@@ -44,6 +51,10 @@ body {
 
 .gray {
   color: #666F78;
+}
+
+.button-gray {
+  background-color: #666F78;
 }
 
 /*# sourceMappingURL=styles.css.map */

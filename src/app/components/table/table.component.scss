@@ -4,7 +4,7 @@
   display: flex;
   margin-top: 2rem;
   flex-direction: column;
-  //max-width: 78.9375rem;
+  max-width: 78.9375rem;
 
   &__header {
     background: #DA2032;
@@ -99,6 +99,5 @@
 .mdc-data-table__cell, .mat-mdc-header-cell   {
   text-align: center;
 }
-
 
 
