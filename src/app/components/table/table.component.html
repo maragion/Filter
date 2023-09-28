@@ -1,4 +1,4 @@
-<div class="table">
+<div class="table" *ngIf="ready">
 
   <div class="paginator">
     <div class="paginator__item-container">
@@ -32,7 +32,7 @@
         <mat-checkbox color="accent" (change)="$event ? toggleAllRows() : null; selectAll($event)"
                       [checked]="selection.hasValue() && isAllSelected()"
                       [indeterminate]="selection.hasValue() && !isAllSelected()"
-                      >
+        >
         </mat-checkbox>
         <span>Логин</span>
       </th>
@@ -56,7 +56,7 @@
 
     <ng-container matColumnDef="phone">
       <th mat-header-cell class="table__header" *matHeaderCellDef> Телефон</th>
-      <td mat-cell *matCellDef="let user"> {{user.phone}} </td>
+      <td mat-cell *matCellDef="let user"> {{user.phone | mask: '+0(000) 000-00-00'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="is_admin">
@@ -119,5 +119,10 @@
       <span class="selected">Колличество выбранных записей: {{selectedRecords}}</span>
     </div>
   </div>
+
+</div>
+
+<div class="spiner">
+  <mat-spinner color="primary" *ngIf="!ready"></mat-spinner>
 
 </div>
