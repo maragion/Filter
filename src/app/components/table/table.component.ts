@@ -8,19 +8,20 @@ import {Data} from "../../interfaces/data";
 import {FinalUser} from "../../interfaces/final-user";
 import {DataService} from "../../services/data.service";
 import {Filter} from "../../interfaces/filter";
-import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatCheckboxChange, MatCheckboxModule} from "@angular/material/checkbox";
 import {SelectionModel} from "@angular/cdk/collections";
 import {LocalStorageService} from "../../services/local-storage.service";
 import {LocalDAta} from "../../interfaces/local-data";
 import {FormsModule} from "@angular/forms";
+import {NgxMaskPipe} from "ngx-mask";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
   standalone: true,
-  imports: [MatTableModule, MatIconModule, NgClass, MatButtonModule, NgIf, DatePipe, MatPaginatorModule, MatCheckboxModule, FormsModule, NgForOf],
+  imports: [MatTableModule, MatIconModule, NgClass, MatButtonModule, NgIf, DatePipe, MatCheckboxModule, FormsModule, NgForOf, NgxMaskPipe, MatProgressSpinnerModule],
 })
 export class TableComponent implements OnInit {
 
@@ -38,6 +39,7 @@ export class TableComponent implements OnInit {
   usersLocal: LocalDAta[] = this.local.getItem("users")
   selection = new SelectionModel<FinalUser>(true, []);
   selectedUsers: LocalDAta[] = []
+  ready: boolean = false
 
 
   ngOnInit() {
@@ -70,7 +72,8 @@ export class TableComponent implements OnInit {
       this.usersToLocal();
       this.remapData();
       this.setDataSource(this.usersFinal);
-      this.allRecords = this.usersFinal.length
+      this.allRecords = this.usersFinal.length;
+      this.ready = true
     });
   }
 
@@ -113,7 +116,6 @@ export class TableComponent implements OnInit {
       const updateAtMatch = !filters.update_at || item.update_at === filters.update_at;
       const createAtMatch = !filters.create_at || item.create_at === filters.create_at;
       const statusMatch = filters.status === "all" || item.status === filters.status;
-      console.log(filters.phone)
       return nameMatch && emailMatch && phoneMatch && isAdminMatch && updateAtMatch && createAtMatch && statusMatch;
     });
     this.setDataSource(this.sortedData)

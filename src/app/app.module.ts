@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FilterComponent} from './components/filter/filter.component';
@@ -14,14 +13,13 @@ import {MatTableModule} from "@angular/material/table";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import {MatPaginatorModule} from "@angular/material/paginator";
-// import { PaginatorComponent } from './components/table/paginator/paginator.component';
+import {NgxMaskDirective, provideEnvironmentNgxMask} from "ngx-mask";
 
 @NgModule({
   declarations: [
     AppComponent,
     FilterComponent,
     AccountsComponent,
-    // PaginatorComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,11 +32,11 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatPaginatorModule,
     MatTableModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxMaskDirective
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, provideEnvironmentNgxMask()],
   exports: [
-    // PaginatorComponent
   ],
   bootstrap: [AppComponent]
 })

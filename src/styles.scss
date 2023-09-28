@@ -2,17 +2,14 @@
 
 @use '@angular/material' as mat;
 
-//@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 @include mat.core();
-
 
 @font-face {
   font-family: "Moscow Sans";
   src: url("./assets/fonts/MoscowSans-Regular.ttf");
 }
-
 
 $md-mcgpalette0: (
   50 : #fbe4e6,
@@ -91,7 +88,7 @@ $typography-config: mat.define-typography-config(
   $subtitle-1: mat.define-typography-level(16px, 28px, 400),
   $body-1: mat.define-typography-level(14px, 20px, 400),
   $body-2: mat.define-typography-level(14px, 20px, 400),
-  $subtitle-2: mat.define-typography-level(16px, 28px, 400),
+  $subtitle-2: mat.define-typography-level(14px, 28px, 400),
   $caption: mat.define-typography-level(12px, 20px, 400),
   $button: mat.define-typography-level(14px, 24px, 300),
 );
@@ -111,6 +108,7 @@ $my-theme: mat.define-light-theme((
 
 @include mat.all-component-themes($my-theme);
 @include mat.typography-hierarchy($my-theme);
+
 
 
 html, body {

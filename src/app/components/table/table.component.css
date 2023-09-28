@@ -83,6 +83,14 @@
   color: #666F78;
 }
 
+.spiner {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .top-border {
   border-top: 0.06rem solid #C4C4C4;
 }
