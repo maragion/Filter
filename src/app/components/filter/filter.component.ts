@@ -40,8 +40,7 @@ export class FilterComponent {
     if (this.filterForm.valid) {
       let filters = this.getFilters()
       this.dataService.setFilters(filters);
-      console.log(filters)
-    } else console.log("invalid", this.filterForm.value.update_at)
+    }
   }
 
   resetFilters() {

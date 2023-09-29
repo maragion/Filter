@@ -92,7 +92,8 @@
 
 
 .top-border {
-  border-top: 0.06rem solid #C4C4C4;
+  border-top: 0.08rem solid #C4C4C4;
+  opacity: .6;
 }
 
 .mdc-data-table__cell, .mat-mdc-header-cell {

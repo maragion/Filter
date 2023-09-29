@@ -1,4 +1,4 @@
-import {Component, OnInit,} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
@@ -59,7 +59,7 @@ export class TableComponent implements OnInit {
     this.data.totalLength.set(this.dataSource.data.length)
   }
 
-  showRecordsDefault: number = 10;
+  showRecordsDefault: number = 20;
   showRecordsValue: number[] = [5, 10, 20]
   selectedRecords: number = 0;
   records: number = this.showRecordsDefault
@@ -94,7 +94,7 @@ export class TableComponent implements OnInit {
     })
     if (this.usersLocal) {
       this.usersFinal.map(user => {
-        this.usersLocal.forEach((u: any) => {
+        this.usersLocal.forEach((u: LocalDAta) => {
           if (u.id === user.id && u.is_admin === user.is_admin) {
             user.status = u.status
           }
@@ -119,6 +119,7 @@ export class TableComponent implements OnInit {
       return nameMatch && emailMatch && phoneMatch && isAdminMatch && updateAtMatch && createAtMatch && statusMatch;
     });
     this.setDataSource(this.sortedData)
+    this.clearSelection()
   }
 
   isAllSelected() {
@@ -157,7 +158,7 @@ export class TableComponent implements OnInit {
       })
     } else if (!event.checked) {
       this.selectedRecords -= 1;
-      let idx = this.selectedUsers.findIndex((value: any) => value.id === user.id && value.is_admin === user.is_admin)
+      let idx = this.selectedUsers.findIndex((value: LocalDAta) => value.id === user.id && value.is_admin === user.is_admin)
       this.selectedUsers.splice(idx, 1)
     }
     this.data.selectedUsers.set(this.selectedUsers)
@@ -178,6 +179,13 @@ export class TableComponent implements OnInit {
       this.selectedUsers = []
       this.selectedRecords = this.selectedUsers.length
     }
+    this.data.selectedUsers.set(this.selectedUsers)
+  }
+
+  clearSelection() {
+    this.selection.clear();
+    this.selectedUsers = []
+    this.selectedRecords = this.selectedUsers.length
     this.data.selectedUsers.set(this.selectedUsers)
   }
 

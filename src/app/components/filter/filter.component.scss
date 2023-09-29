@@ -6,7 +6,6 @@
   background: #FFF;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.05);
   margin-top: 2rem;
-  //max-width: 78.9375rem;
 
   &__inputs-container {
     display: flex;
@@ -57,7 +56,8 @@ input, select {
   font-weight: 300;
   line-height: 1.125rem;
   font-family: "Moscow Sans", sans-serif;
-  &:focus{
+
+  &:focus {
     outline: 1px solid rgba(162, 169, 177, 1);
   }
 }
@@ -73,21 +73,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 }
 
-
 .input {
   position: relative;
 }
 
 .cancel {
-  color:rgba(162, 169, 177, 1) ;
+  color: rgba(162, 169, 177, 1);
 }
 
 input.ng-touched.ng-invalid {
-  border:solid #FF001F 1px;
+  border: solid #FF001F 1px;
   outline: solid #FF001F 1px;
 }
 
-input.ng-touched.ng-invalid + .clear > .cancel{
+input.ng-touched.ng-invalid + .clear > .cancel {
   color: #FF001F;
 }
 
