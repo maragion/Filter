@@ -11,3 +11,5 @@
 ## GitHub Pages
 
 Посмотреть можно [тут](https://maragion.github.io/Filter/)
+
+Готовый билд находится в ветке [gh-pages](https://github.com/maragion/Filter/tree/gh-pages)
