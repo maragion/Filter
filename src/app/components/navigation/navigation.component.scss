@@ -1,0 +1,154 @@
+.drawer-container {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #555;
+}
+
+.mat-drawer {
+  max-width: 17.0625rem;
+  width: 100%;
+  background: #666F78;
+}
+
+
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user {
+  display: flex;
+  height: 3rem;
+  padding: 0;
+  justify-self: flex-start;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  gap: .44rem;
+
+  &__photo {
+    width: 2.125rem;
+    height: 2.1875rem;
+    position: relative;
+  }
+
+  &__icon {
+    font-size: 2.125rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2.125rem;
+    height: 2.1875rem;
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.125rem;
+  }
+
+}
+
+.flex-container-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_column {
+    flex-direction: column;
+  }
+}
+
+.agents {
+  color: #FFFFFF;
+  flex-direction: column;
+  border-bottom: 1px solid #C4C4C4;
+  font-style: normal;
+
+  &__select {
+    display: flex;
+    flex-direction: column;
+    height: 6.06rem;
+  }
+
+  &__select-label {
+    gap: 1.5rem;
+    line-height: 1.625rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+
+  }
+
+  &__select-option {
+    font-weight: 300;
+    line-height: 1.4375rem;
+    font-size: 1rem;
+    align-self: flex-start;
+  }
+}
+
+.management {
+  flex-direction: column;
+  padding: 1rem 1rem;
+  color: #FFFFFF;
+  margin-top: .25rem;
+  background: #A2A9B1;
+  gap: 1rem;
+
+  & a {
+    text-decoration: none;
+    color: #FFFFFF;
+    display: block;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.125rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      text-decoration: underline;
+      text-underline-offset: .23rem;
+      text-decoration-thickness: 0.0625rem;
+    }
+
+  }
+
+  &__label {
+    gap: 1rem;
+    align-self: flex-start;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5rem;
+  }
+
+  &__options {
+    flex-direction: column;
+    gap: 1.56rem;
+  }
+}
+
+.subAgents {
+  gap: 1rem;
+  color: #FFFFFF;
+  padding: 1rem 1rem;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+  justify-content: flex-start;
+}
+
+
+@media (max-width: 1440px) {
+  .mat-drawer {
+    max-width: 16.4375rem;
+    width: 100%;
+    background: #666F78;
+  }
+}

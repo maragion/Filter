@@ -14,12 +14,17 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DatePipe} from "@angular/common";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {NgxMaskDirective, provideEnvironmentNgxMask} from "ngx-mask";
+import { NavigationComponent } from './components/navigation/navigation.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
     AppComponent,
     FilterComponent,
     AccountsComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,10 @@ import {NgxMaskDirective, provideEnvironmentNgxMask} from "ngx-mask";
     MatTableModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatSelectModule
   ],
   providers: [DatePipe, provideEnvironmentNgxMask()],
   exports: [

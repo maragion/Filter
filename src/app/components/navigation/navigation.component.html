@@ -1,0 +1,53 @@
+<mat-toolbar color="primary" >
+
+  <div class="empty"></div>
+  <span class="spacer"></span>
+  <div class="user">
+    <div class="user__photo">
+      <mat-icon class="user__icon">account_circle</mat-icon>
+    </div>
+    <div class="user__data">
+      <span class="user__name">Иванов</span>
+      <span class="user__role">Администратор</span>
+    </div>
+    <mat-icon>arrow_drop_down</mat-icon>
+
+  </div>
+</mat-toolbar>
+<mat-drawer-container class="drawer-container">
+  <mat-drawer  mode="side" opened class="mat-drawer">
+
+    <div class="agents flex-container-center">
+      <div class="agents__select flex-container-center">
+        <div class="agents__select-label flex-container-center">
+          <span>Суперагент</span>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </div>
+        <div class="agents__select-option flex-container-center">
+          <span>Банк ВТБ(ПАО)</span>
+        </div>
+      </div>
+    </div>
+    <div class="flex-container-center management">
+      <div class="management__label flex-container-center">
+        <mat-icon>work</mat-icon>
+        <span>Управление</span>
+      </div>
+
+      <div class="management__options flex-container-center">
+        <a href="#">Карточка контрагента</a>
+        <a href="#">Договоры контрагента</a>
+      </div>
+
+    </div>
+
+    <div class="flex-container-center subAgents">
+      <mat-icon>supervisor_account</mat-icon>
+      <span>Субагенты</span>
+    </div>
+
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-accounts></app-accounts>
+  </mat-drawer-content>
+</mat-drawer-container>
