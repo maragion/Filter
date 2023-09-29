@@ -36,7 +36,7 @@
       <div class="form__input-container">
         <label for="status">Статус</label>
         <div class="input">
-          <select id="status" name="status" formControlName="status">
+          <select id="status" name="status" class="select" formControlName="status">
             <option value="all">Все</option>
             <option value="ACTIVE">Активен</option>
             <option value="BLOCKED">Заблокирован</option>
@@ -57,7 +57,7 @@
       <div class="form__input-container">
         <label for="is_admin">Роль</label>
         <div class="input">
-          <select id="is_admin" name="is_admin" formControlName="is_admin">
+          <select id="is_admin" name="is_admin" class="select" formControlName="is_admin">
             <option value="all">Все</option>
             <option [ngValue]=false>Пользователь</option>
             <option [ngValue]=true>Администратор</option>
