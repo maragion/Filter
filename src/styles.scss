@@ -110,7 +110,6 @@ $my-theme: mat.define-light-theme((
 @include mat.typography-hierarchy($my-theme);
 
 
-
 html, body {
   height: 100%;
 }

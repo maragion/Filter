@@ -2,6 +2,8 @@ version: "3.8"
 
 services:
   dashboard:
+    environment:
+      HOST: ${HOST}
     build: .
     ports:
       - "4200:4200"

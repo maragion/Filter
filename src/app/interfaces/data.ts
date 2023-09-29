@@ -1,5 +1,5 @@
-import { User } from './user';
-import { UserData} from "./user-data";
+import {User} from './user';
+import {UserData} from "./user-data";
 
 export interface Data {
   data: UserData[],

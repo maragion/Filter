@@ -40,8 +40,8 @@ export class AccountsComponent {
 
   unblockUser() {
     let localUsers = this.localStorage.getItem("users")
-    localUsers.map((user: any) => {
-      this.selectedUsers().forEach((u: any) => {
+    localUsers.map((user: LocalDAta) => {
+      this.selectedUsers().forEach((u: LocalDAta) => {
         if (user.id === u.id && user.is_admin == u.is_admin) {
           user.status = "ACTIVE"
         }
