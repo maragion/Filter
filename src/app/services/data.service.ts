@@ -1,6 +1,7 @@
 import {Injectable, signal} from '@angular/core';
-import {BehaviorSubject, Subject} from "rxjs";
+import {Subject} from "rxjs";
 import {LocalDAta} from "../interfaces/local-data";
+import {Filter} from "../interfaces/filter";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class DataService {
   constructor() {
   }
 
-  private filtersSubject = new BehaviorSubject<any>({});
+  private filtersSubject = new Subject<Filter>();
 
   filters$ = this.filtersSubject.asObservable();
 
@@ -31,6 +32,7 @@ export class DataService {
 
   private statusSubject = new Subject<LocalDAta[]>()
   status$ = this.statusSubject.asObservable()
+
   changeStatus(statusData: LocalDAta[]) {
     this.statusSubject.next(statusData)
   }

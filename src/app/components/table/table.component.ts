@@ -135,7 +135,7 @@ export class TableComponent implements OnInit {
 
   usersToLocal() {
     if (!this.usersLocal) {
-      const users: {}[] = []
+      const users: LocalDAta[] = []
       this.usersFinal.forEach(user => {
         users.push({id: user.id, is_admin: user.is_admin, status: user.status})
       })
