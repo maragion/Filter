@@ -4,12 +4,12 @@
     <div class="paginator__item-container">
       <label for="show">Отображать </label>
       <div class="customSelect">
-        <select id="show" name="show" [(ngModel)]="showRecordsDefault">
+        <select id="show" name="show" [(ngModel)]="recordsToShow">
           <option *ngFor="let value of showRecordsValue">{{value}}</option>
         </select>
       </div>
       <span> записей</span>
-      <span class="paginator__records">1 - {{records}} из {{allRecords}}</span>
+      <span class="paginator__records">1 - {{recordsToShow}} из {{allRecords}}</span>
     </div>
 
     <div class="paginator__item-container">
@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource.data | slice:0:recordsToShow">
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Действия</th>
       <td mat-cell *matCellDef="let user">
@@ -107,12 +107,12 @@
     <div class="paginator__item-container">
       <label for="show2">Отображать </label>
       <div class="customSelect">
-        <select id="show2" name="show" [(ngModel)]="showRecordsDefault">
+        <select id="show2" name="show" [(ngModel)]="recordsToShow">
           <option *ngFor="let value of showRecordsValue">{{value}}</option>
         </select>
       </div>
       <span> записей</span>
-      <span class="paginator__records">1 - {{records}} из {{allRecords}}</span>
+      <span class="paginator__records">1 - {{recordsToShow}} из {{allRecords}}</span>
     </div>
 
     <div class="paginator__item-container">
@@ -124,5 +124,4 @@
 
 <div class="spiner">
   <mat-spinner color="primary" *ngIf="!ready"></mat-spinner>
-
 </div>

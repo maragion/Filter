@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
-import {DatePipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {DatePipe, NgClass, NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {Data} from "../../interfaces/data";
 import {FinalUser} from "../../interfaces/final-user";
@@ -21,7 +21,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
   standalone: true,
-  imports: [MatTableModule, MatIconModule, NgClass, MatButtonModule, NgIf, DatePipe, MatCheckboxModule, FormsModule, NgForOf, NgxMaskPipe, MatProgressSpinnerModule],
+  imports: [MatTableModule, MatIconModule, NgClass, MatButtonModule, NgIf, DatePipe, MatCheckboxModule, FormsModule, NgForOf, NgxMaskPipe, MatProgressSpinnerModule, SlicePipe],
 })
 export class TableComponent implements OnInit {
 
@@ -40,7 +40,10 @@ export class TableComponent implements OnInit {
   selection = new SelectionModel<FinalUser>(true, []);
   selectedUsers: LocalDAta[] = []
   ready: boolean = false
-
+  recordsToShow: number = 20;
+  showRecordsValue: number[] = [5, 10, 20]
+  selectedRecords: number = 0;
+  allRecords: number | null = null;
 
   ngOnInit() {
     this.loadData();
@@ -58,12 +61,6 @@ export class TableComponent implements OnInit {
     })
     this.data.totalLength.set(this.dataSource.data.length)
   }
-
-  showRecordsDefault: number = 20;
-  showRecordsValue: number[] = [5, 10, 20]
-  selectedRecords: number = 0;
-  records: number = this.showRecordsDefault
-  allRecords: number | null = null;
 
 
   loadData() {
@@ -135,7 +132,6 @@ export class TableComponent implements OnInit {
     }
     this.selection.select(...this.dataSource.data);
   }
-
 
   usersToLocal() {
     if (!this.usersLocal) {
