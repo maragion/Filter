@@ -140,7 +140,6 @@ export class TableComponent implements OnInit {
         users.push({id: user.id, is_admin: user.is_admin, status: user.status})
       })
       this.local.setItem("users", users)
-      console.log(this.local.getItem("users"), "in Local")
     }
   }
 
