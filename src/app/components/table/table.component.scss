@@ -4,12 +4,10 @@
   display: flex;
   margin-top: 2rem;
   flex-direction: column;
-  max-width: 78.9375rem;
 
   &__header {
     background: #DA2032;
     color: #FFFFFF;
-    //text-align: center;
   }
 
   &__row {
@@ -101,8 +99,7 @@
 }
 
 .top-border {
-  border-top: 0.08rem solid #C4C4C4;
-  opacity: .6;
+  border-top: 0.08rem solid rgba(196,196,196, .6);
 }
 
 .mdc-data-table__cell, .mat-mdc-header-cell   {

@@ -6,7 +6,7 @@ import {LocalDAta} from "../../interfaces/local-data";
 @Component({
   selector: 'app-accounts',
   templateUrl: './accounts.component.html',
-  styleUrls: ['./accounts.component.css']
+  styleUrls: ['./accounts.component.scss']
 })
 export class AccountsComponent {
   filter = this.dataService.controlFilter;

@@ -19,7 +19,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  styleUrls: ['./table.component.scss'],
   standalone: true,
   imports: [MatTableModule, MatIconModule, NgClass, MatButtonModule, NgIf, DatePipe, MatCheckboxModule, FormsModule, NgForOf, NgxMaskPipe, MatProgressSpinnerModule, SlicePipe],
 })
