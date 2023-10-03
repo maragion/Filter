@@ -23,7 +23,6 @@
     justify-content: center;
     align-items: center;
     background-color: #FFFFFF;
-    margin: 0 auto;
     border: none;
 
     &:hover {
@@ -37,6 +36,12 @@
   display: flex;
   padding: 1.5rem 4.5rem;
   gap: 2.69rem;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.125rem;
+  flex-wrap: wrap;
+  position: relative;
 
   &__item-container {
     display: flex;
@@ -52,7 +57,7 @@
 
 .customSelect {
   position: relative;
-  width: 4.0625rem;
+  min-width: 4.0625rem;
   height: 1.5rem;
   box-sizing: border-box;
   outline: none;
@@ -65,8 +70,8 @@
     content: "";
     position: absolute;
     top: 0;
-    right: 1.2rem;
-    width: 2px;
+    right: 29.5%;
+    width: 1px;
     height: 1.5rem;
     display: block;
     background-color: rgba(130, 140, 150, 0.40);
@@ -86,6 +91,13 @@
     font-weight: 300;
     line-height: 1.125rem;
   }
+
+  &_clear {
+    &::before {
+      content: "";
+      background: transparent;
+    }
+  }
 }
 
 .spiner {
@@ -103,8 +115,108 @@
   border-top: 0.08rem solid rgba(196, 196, 196, .6);
 }
 
-.mdc-data-table__cell, .mat-mdc-header-cell {
-  text-align: center;
+
+
+mat-cell, mat-header-cell {
+  justify-content: center;
 }
+
+mat-row {
+  flex-wrap: wrap;
+}
+
+.mobile-header {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .paginator {
+    height: 5.62rem;
+    box-sizing: border-box;
+  }
+
+  .selected {
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .paginator {
+    min-height: 5.62rem;
+    box-sizing: content-box;
+    gap: 1rem;
+  }
+
+  .selected {
+    position: static;
+  }
+
+  .mobile-header {
+    display: block;
+    min-width: 50%;
+    justify-self: flex-start;
+    color: #282828;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.125rem; /* 128.571% */
+  }
+  mat-table span{
+    display: inline-block;
+  }
+  mat-table {
+    gap: 2rem;
+
+  }
+
+  mat-header-row{
+    display: none;
+  }
+
+  mat-row {
+    //flex-direction: column;
+    max-height: 17.5rem;
+    //flex-wrap: wrap;
+    //width: 50%;
+
+    margin-top: .5rem;
+    border-top: 0.0625rem solid #C4C4C4;
+  }
+
+  mat-cell {
+    justify-content: flex-start;
+    padding-left: 3rem;
+    min-width: 50%;
+    max-width: 50%;
+
+
+
+    &:nth-child(odd) {
+      border-right: 1px solid #C4C4C4;
+    }
+
+    & span {
+      display: block;
+      //min-width: 50%;
+      text-align: left;
+    }
+
+
+    &:first-of-type {
+      padding-left: 3rem;
+
+    }
+  }
+
+  .mdc-data-table__row:last-child .mat-mdc-cell{
+    border-bottom: 1px solid rgba(196, 196, 196, 0.5);
+  }
+
+}
+
+
 
 

@@ -15,28 +15,44 @@
     <div class="paginator__item-container">
       <span class="selected">Колличество выбранных записей: {{selectedRecords}}</span>
     </div>
+
+    <div class="paginator__item-container">
+      <label for="show">Сортировать по: </label>
+      <div class="customSelect customSelect_clear">
+        <select name="sortSelect" id="sortSelect" [(ngModel)]="sortingValue" (ngModelChange)="sortTable()">
+          <option *ngFor="let option of sortingOptions" value="{{option.name}}">{{option.value}}</option>
+        </select>
+      </div>
+    </div>
+
+
   </div>
 
-  <table mat-table [dataSource]="dataSource.data | slice:0:recordsToShow">
+  <mat-table [dataSource]="dataSource.data | slice:0:recordsToShow">
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Действия</th>
-      <td mat-cell *matCellDef="let user">
+      <mat-header-cell *matHeaderCellDef> Действия</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Действия</span>
         <button class="table__action-btn">
           <mat-icon>more_horiz</mat-icon>
         </button>
-      </td>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell class="table__header" *matHeaderCellDef="let user">
+      <mat-header-cell class="table__header" *matHeaderCellDef="let user">
         <mat-checkbox color="accent" (change)="$event ? toggleAllRows() : null; selectAll($event)"
                       [checked]="selection.hasValue() && isAllSelected()"
                       [indeterminate]="selection.hasValue() && !isAllSelected()"
         >
         </mat-checkbox>
-        <span>Логин</span>
-      </th>
-      <td mat-cell *matCellDef="let user">
+        <span class="login-span">
+          Логин
+        </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Логин</span>
+
         <span>
           <mat-checkbox color="accent" (click)="$event.stopPropagation()"
                         (change)="$event ? selection.toggle(user) : null; selectUser($event, user)"
@@ -44,64 +60,86 @@
           >
         </mat-checkbox>
         </span>
-        {{user.name}}
+        <span>{{user.name}}</span>
 
-      </td>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <th mat-header-cell class="table__header" *matHeaderCellDef> E-mail</th>
-      <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+      <mat-header-cell class="table__header" *matHeaderCellDef> E-mail</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">E-mail</span>
+        {{user.email}}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="phone">
-      <th mat-header-cell class="table__header" *matHeaderCellDef> Телефон</th>
-      <td mat-cell *matCellDef="let user"> {{user.phone | mask: '+0(000) 000-00-00'}} </td>
+      <mat-header-cell class="table__header" *matHeaderCellDef> Телефон</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Телефон</span>
+        {{user.phone | mask: '+0(000) 000-00-00'}}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="is_admin">
-      <th mat-header-cell *matHeaderCellDef> Роли</th>
-      <td mat-cell *matCellDef="let user">
+      <mat-header-cell *matHeaderCellDef> Роли</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Роль</span>
+
         <span *ngIf="user.is_admin">Администратор</span>
         <span *ngIf="!user.is_admin">Пользователь</span>
-      </td>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="update_at">
-      <th mat-header-cell *matHeaderCellDef> Дата изменения</th>
-      <td mat-cell *matCellDef="let user">
+      <mat-header-cell *matHeaderCellDef> Дата изменения</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header"> Дата изменения</span>
+
         {{user.update_at}}
-      </td>
+      </mat-cell>
+      >
     </ng-container>
 
     <ng-container matColumnDef="create_at">
-      <th mat-header-cell *matHeaderCellDef> Дата создания</th>
-      <td mat-cell *matCellDef="let user">
+      <mat-header-cell *matHeaderCellDef> Дата создания</mat-header-cell>
+      >
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header"> Дата создания</span>
         {{user.create_at}}
-      </td>
+      </mat-cell>
+      >
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef> Статус</th>
-      <td mat-cell *matCellDef="let user">
+      <mat-header-cell *matHeaderCellDef> Статус</mat-header-cell>
+      >
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Статус</span>
         <span *ngIf="user.status === 'ACTIVE'" class="green">Активен</span>
         <span *ngIf="user.status === 'BLOCKED'" class="red">Заблокирован</span>
-      </td>
+      </mat-cell>
+      >
     </ng-container>
 
     <ng-container matColumnDef="is_ecp">
-      <th mat-header-cell *matHeaderCellDef> Наличие ЭП</th>
-      <td mat-cell *matCellDef="let user">
+      <mat-header-cell *matHeaderCellDef> Наличие ЭП</mat-header-cell>
+      >
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Наличие ЭП</span>
         <mat-icon *ngIf="user.is_ecp" class="green">check_circle</mat-icon>
         <mat-icon class="red" *ngIf="!user.is_ecp">cancel</mat-icon>
-      </td>
+      </mat-cell>
+      >
     </ng-container>
 
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table__header"></tr>
-    <tr mat-row *matRowDef="let user; let id; columns: displayedColumns;" class="table__row"
-        (click)="selection.toggle(user)"></tr>
-  </table>
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="table__header"></mat-header-row>
+    >
+    <mat-row *matRowDef="let user; let id; columns: displayedColumns;" class="table__row"
+             (click)="selection.toggle(user)"></mat-row>
+    >
+  </mat-table>
 
   <div class="paginator top-border">
     <div class="paginator__item-container">
