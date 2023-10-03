@@ -15,6 +15,7 @@ import {LocalDAta} from "../../interfaces/local-data";
 import {FormsModule} from "@angular/forms";
 import {NgxMaskPipe} from "ngx-mask";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {Sorting} from "../../interfaces/sorting";
 
 @Component({
   selector: 'app-table',
@@ -34,7 +35,7 @@ export class TableComponent implements OnInit {
 
   dataSource = new MatTableDataSource<FinalUser>();
   displayedColumns: string[] = ['actions', 'name', 'email', 'phone', "is_admin", "update_at", "create_at", "status", "is_ecp"];
-  sortedData: FinalUser[] = [];
+  filteredData: FinalUser[] = [];
   usersFinal: FinalUser[] = [];
   usersLocal: LocalDAta[] = this.local.getItem("users")
   selection = new SelectionModel<FinalUser>(true, []);
@@ -44,6 +45,18 @@ export class TableComponent implements OnInit {
   showRecordsValue: number[] = [5, 10, 20]
   selectedRecords: number = 0;
   allRecords: number | null = null;
+  sortingOptions: Sorting[] = [
+    {name: "name", value: "Логин"},
+    {name: "email", value: "E-mail"},
+    {name: "phone", value: "Телефон"},
+    {name: "is_admin", value: "Роль"},
+    {name: "update_at", value: "Дата изменения"},
+    {name: "create_at", value: "Дата создания"},
+    {name: "status", value: "Статус"},
+    {name: "is_ecp", value: "Наличие ЭП"},
+  ]
+
+  sortingValue: string = "name"
 
   ngOnInit() {
     this.loadData();
@@ -105,7 +118,7 @@ export class TableComponent implements OnInit {
   }
 
   applyFilters(filters: Filter) {
-    this.sortedData = this.usersFinal.filter(item => {
+    this.filteredData = this.usersFinal.filter(item => {
       const nameMatch = !filters.name || item.name === filters.name;
       const emailMatch = !filters.email || item.email.includes(filters.email);
       const phoneMatch = !filters.phone || item.phone === filters.phone;
@@ -115,7 +128,7 @@ export class TableComponent implements OnInit {
       const statusMatch = filters.status === "all" || item.status === filters.status;
       return nameMatch && emailMatch && phoneMatch && isAdminMatch && updateAtMatch && createAtMatch && statusMatch;
     });
-    this.setDataSource(this.sortedData)
+    this.setDataSource(this.filteredData)
     this.clearSelection()
   }
 
@@ -184,6 +197,29 @@ export class TableComponent implements OnInit {
     this.data.selectedUsers.set(this.selectedUsers)
   }
 
+
+  sortTable() {
+    let value = this.sortingValue
+    this.dataSource.data.sort((a: any, b: any): any => {
+      const valueA = a[value]
+      const valueB = b[value]
+
+      if (typeof valueA === "string" && typeof valueB === "string") {
+        return valueA.localeCompare(valueB);
+      } else if (typeof valueA === "number" && typeof valueB === "number") {
+        return valueA - valueB
+      } else if (typeof valueA === "boolean" && typeof valueB === "boolean") {
+        if (valueA && !valueB) {
+          return -1;
+        } else if (!valueA && valueB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+    })
+    console.log(this.sortingValue)
+  }
 }
 
 
