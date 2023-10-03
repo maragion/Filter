@@ -2,7 +2,7 @@
 
   <div class="empty"></div>
   <span class="spacer"></span>
-  <div class="user">
+  <div class="user" *ngIf="isOpened">
     <div class="user__photo">
       <mat-icon class="user__icon">account_circle</mat-icon>
     </div>
@@ -13,9 +13,16 @@
     <mat-icon>arrow_drop_down</mat-icon>
 
   </div>
+
+  <button mat-icon-button (click)="nav.toggle()" *ngIf="!isOpened">
+    <mat-icon>menu</mat-icon>
+  </button>
 </mat-toolbar>
-<mat-drawer-container class="drawer-container">
-  <mat-drawer mode="side" opened class="mat-drawer">
+
+
+
+<mat-drawer-container class="drawer-container" >
+  <mat-drawer #nav [mode]="isOpened ? 'side' : 'over'" [(opened)]="sideNavState" class="mat-drawer" >
 
     <div class="agents flex-container-center">
       <div class="agents__select flex-container-center">
