@@ -159,6 +159,19 @@ body {
   border-radius: 50%;
 }
 
+@media (max-width: 1024px) {
+  .wrapper {
+    padding: 2rem 2.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 2rem 2.4rem;
+  }
+}
+
+
 @media (max-width: 540px) {
   .wrapper {
     padding: 1rem 0;
