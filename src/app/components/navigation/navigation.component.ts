@@ -12,8 +12,8 @@ export class NavigationComponent {
 
   isOpened: boolean = true;
   width: number = 1200;
-
   sideNavState = true
+  isMobile = false
 
   ngOnInit() {
     this.onResize(window.innerWidth)
@@ -24,6 +24,9 @@ export class NavigationComponent {
   onResize(width: number) {
     this.isOpened = width >= this.width;
     this.sideNavState = width >= this.width;
+    if (width <= 540) {
+      this.isMobile = true
+    } else this.isMobile = false
   }
 
 

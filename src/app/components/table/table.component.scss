@@ -116,9 +116,19 @@
 }
 
 
-
 mat-cell, mat-header-cell {
   justify-content: center;
+  align-items: center;
+  padding: 0 .75rem;
+  box-sizing: border-box;
+}
+
+mat-cell:first-of-type, mat-header-cell:first-of-type {
+  max-width: 7rem;
+}
+
+mat-cell:last-of-type, mat-header-cell:last-of-type {
+  max-width: 7rem;
 }
 
 mat-row {
@@ -129,10 +139,17 @@ mat-row {
   display: none;
 }
 
+@media (min-width: 1400px) {
+  mat-cell, mat-header-cell {
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 1024px) {
   .paginator {
-    height: 5.62rem;
+    min-height: 5.62rem;
     box-sizing: border-box;
+    gap: 1rem;
   }
 
   .selected {
@@ -140,16 +157,10 @@ mat-row {
     bottom: 0;
     left: 1rem;
   }
+
 }
 
 @media (max-width: 768px) {
-
-  .paginator {
-    min-height: 5.62rem;
-    box-sizing: content-box;
-    gap: 1rem;
-  }
-
   .selected {
     position: static;
   }
@@ -162,26 +173,19 @@ mat-row {
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 700;
-    line-height: 1.125rem; /* 128.571% */
+    line-height: 1.125rem;
   }
-  mat-table span{
+
+  mat-table span {
     display: inline-block;
   }
-  mat-table {
-    gap: 2rem;
 
-  }
-
-  mat-header-row{
+  mat-header-row {
     display: none;
   }
 
   mat-row {
-    //flex-direction: column;
     max-height: 17.5rem;
-    //flex-wrap: wrap;
-    //width: 50%;
-
     margin-top: .5rem;
     border-top: 0.0625rem solid #C4C4C4;
   }
@@ -193,28 +197,69 @@ mat-row {
     max-width: 50%;
 
 
-
     &:nth-child(odd) {
       border-right: 1px solid #C4C4C4;
     }
 
     & span {
       display: block;
-      //min-width: 50%;
       text-align: left;
     }
 
-
     &:first-of-type {
       padding-left: 3rem;
-
     }
   }
 
-  .mdc-data-table__row:last-child .mat-mdc-cell{
+  .mdc-data-table__row:last-child .mat-mdc-cell {
     border-bottom: 1px solid rgba(196, 196, 196, 0.5);
   }
+}
 
+@media (max-width: 600px) {
+  .paginator {
+    padding: 1rem .5rem 3.88rem;
+    min-height: max-content;
+    gap: 1rem;
+  }
+
+  mat-row {
+    margin-top: .56rem;
+    max-height: none;
+  }
+
+  mat-table {
+    height: max-content;
+  }
+
+  mat-cell {
+    justify-content: flex-start;
+    padding-left: 2.5rem;
+    min-width: 100%;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 100%;
+      width: 0.0625rem;
+      background: #C4C4C4;
+    }
+
+    &:nth-child(odd) {
+      border-right: none;
+    }
+
+    &:first-of-type {
+      padding-left: 2.5rem;
+    }
+  }
+
+  .mobile-header {
+    min-width: 55%;
+  }
 }
 
 

@@ -9,7 +9,7 @@
 
   &__inputs-container {
     display: flex;
-    padding: 2rem 1.5rem;
+    padding: 2rem 0;
     flex-wrap: wrap;
     gap: 1.5rem;
   }
@@ -17,6 +17,8 @@
   &__input-container {
     display: flex;
     flex-direction: column;
+    max-width: 16.5625rem;
+    width: 100%;
   }
 }
 
@@ -47,7 +49,7 @@ label {
 }
 
 input, select {
-  width: 266px;
+  width: 100%;
   height: 44px;
   border-radius: 8px;
   border: 1px solid rgba(130, 140, 150, 0.40);
@@ -58,6 +60,7 @@ input, select {
   font-weight: 300;
   line-height: 1.125rem;
   font-family: "Moscow Sans", sans-serif;
+  display: flex;
 
   &:focus {
     outline: 1px solid rgba(162, 169, 177, 1);
@@ -99,3 +102,49 @@ input.ng-touched.ng-invalid + .clear > .cancel {
   color: #FF001F;
 }
 
+@media (max-width: 1024px) {
+  .form__input-container {
+    max-width: 16.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form__input-container {
+    max-width: 18.25rem;
+  }
+  .form__inputs-container {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .form {
+    padding: .5rem;
+
+    &__input-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding: 0;
+      max-width: 24.625rem;
+
+    }
+  }
+
+  input, select {
+    max-width: 24.625rem;
+    width: 100%;
+  }
+
+  .filter-button {
+    max-width: 8.5rem;
+    width: 100%;
+  }
+
+  .buttons {
+    flex-direction: column;
+    margin: 0 auto;
+  }
+
+
+}
