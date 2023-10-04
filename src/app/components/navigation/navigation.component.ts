@@ -24,9 +24,7 @@ export class NavigationComponent {
   onResize(width: number) {
     this.isOpened = width >= this.width;
     this.sideNavState = width >= this.width;
-    if (width <= 540) {
-      this.isMobile = true
-    } else this.isMobile = false
+    this.isMobile = width <= 540;
   }
 
 
