@@ -84,7 +84,6 @@ export class TableComponent implements OnInit {
 
   onResize(width: number) {
     this.isTablet = width < this.width
-    console.log(window.innerWidth)
   }
 
   loadData() {

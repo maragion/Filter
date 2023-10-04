@@ -1,32 +1,31 @@
 <div class="wrapper">
-  <a href="#" class="back">
+  <a href="#" class="back pl">
     <span class="material-icons gray"> arrow_back_ios </span> Назад
   </a>
 
-  <h2>Настройка учетных записей сотрудников контрагента</h2>
+  <h2 class="pl">Настройка учетных записей сотрудников контрагента</h2>
 
-  <div class="container jc-sb container_wrap">
-    <div class="container">
+  <div class="container jc-sb container_wrap pl">
+    <div class="container container_wrap">
 
       <button mat-flat-button color="primary" (click)="clearLocal()">
         Добавить
-        <mat-icon iconPositionEnd>add_circle_outline</mat-icon>
+        <mat-icon iconPositionEnd *ngIf="!isMobile">add_circle_outline</mat-icon>
       </button>
 
       <button mat-flat-button color="primary" (click)="unblockUser()">
         Разблокировать
-        <mat-icon iconPositionEnd>check_circle_outline</mat-icon>
+        <mat-icon iconPositionEnd *ngIf="!isMobile">check_circle_outline</mat-icon>
       </button>
       <button mat-flat-button color="primary" (click)="blockUser()">
         Заблокировать
-        <mat-icon iconPositionEnd>highlight_off</mat-icon>
+        <mat-icon iconPositionEnd *ngIf="!isMobile">highlight_off</mat-icon>
       </button>
     </div>
 
     <button mat-flat-button color="accent" [disabled]="filter()" (click)="controlFilter()">
-      <mat-icon>filter_list</mat-icon>
+      <mat-icon *ngIf="!isMobile">filter_list</mat-icon>
       <span>Фильтр</span>
-
     </button>
   </div>
 

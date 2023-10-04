@@ -159,3 +159,8 @@ body {
   border-radius: 50%;
 }
 
+@media (max-width: 540px) {
+  .wrapper {
+    padding: 1rem 0;
+  }
+}

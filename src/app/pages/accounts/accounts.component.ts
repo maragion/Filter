@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {DataService} from "../../services/data.service";
 import {LocalStorageService} from "../../services/local-storage.service";
 import {LocalDAta} from "../../interfaces/local-data";
@@ -13,6 +13,8 @@ export class AccountsComponent {
 
   constructor(private dataService: DataService, private localStorage: LocalStorageService) {
   }
+
+  @Input() isMobile: boolean = false
 
   controlFilter() {
     if (this.filter()) {

@@ -17,3 +17,26 @@ h2 {
   line-height: 2.25rem;
 }
 
+@media (max-width: 1024px) {
+  h2 {
+    font-size: 1.375rem;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .container {
+    gap: 1rem;
+  }
+
+  .pl {
+    padding-left: 1rem;
+  }
+
+  button {
+    max-width: 8.4rem;
+    width: 100%;
+    justify-self: center;
+  }
+}
+
