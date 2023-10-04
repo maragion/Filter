@@ -122,6 +122,8 @@ mat-cell, mat-header-cell {
   align-items: center;
   padding: 0 .75rem;
   box-sizing: border-box;
+  text-align: center;
+
 }
 
 mat-cell:first-of-type, mat-header-cell:first-of-type {
@@ -130,6 +132,8 @@ mat-cell:first-of-type, mat-header-cell:first-of-type {
 
 mat-cell:last-of-type, mat-header-cell:last-of-type {
   max-width: 7rem;
+  text-align: center;
+
 }
 
 mat-row {
