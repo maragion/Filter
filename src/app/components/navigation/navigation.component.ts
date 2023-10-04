@@ -1,5 +1,4 @@
-import {Component, HostListener, ViewChild} from '@angular/core';
-import {MatMenuTrigger} from "@angular/material/menu";
+import {Component, HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-navigation',
@@ -13,8 +12,6 @@ export class NavigationComponent {
 
   isOpened: boolean = true;
   width: number = 1200;
-  mode: any = 'side'
-
 
   sideNavState = true
 

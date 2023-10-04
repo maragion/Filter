@@ -16,7 +16,7 @@
       <span class="selected">Колличество выбранных записей: {{selectedRecords}}</span>
     </div>
 
-    <div class="paginator__item-container">
+    <div class="paginator__item-container" *ngIf="isTablet">
       <label for="show">Сортировать по: </label>
       <div class="customSelect customSelect_clear">
         <select name="sortSelect" id="sortSelect" [(ngModel)]="sortingValue" (ngModelChange)="sortTable()">
@@ -24,7 +24,6 @@
         </select>
       </div>
     </div>
-
 
   </div>
 
@@ -143,7 +142,7 @@
 
   <div class="paginator top-border">
     <div class="paginator__item-container">
-      <label for="show2">Отображать </label>
+      <label for="show">Отображать </label>
       <div class="customSelect">
         <select id="show2" name="show" [(ngModel)]="recordsToShow">
           <option *ngFor="let value of showRecordsValue">{{value}}</option>
@@ -156,6 +155,16 @@
     <div class="paginator__item-container">
       <span class="selected">Колличество выбранных записей: {{selectedRecords}}</span>
     </div>
+
+    <div class="paginator__item-container" *ngIf="isTablet">
+      <label for="show">Сортировать по: </label>
+      <div class="customSelect customSelect_clear">
+        <select name="sortSelect" id="sortSelect2" [(ngModel)]="sortingValue" (ngModelChange)="sortTable()">
+          <option *ngFor="let option of sortingOptions" value="{{option.name}}">{{option.value}}</option>
+        </select>
+      </div>
+    </div>
+
   </div>
 
 </div>

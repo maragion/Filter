@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatIconModule} from "@angular/material/icon";
@@ -56,7 +56,13 @@ export class TableComponent implements OnInit {
     {name: "is_ecp", value: "Наличие ЭП"},
   ]
 
-  sortingValue: string = "name"
+  sortingValue: string = "name";
+
+  width: number = 1024;
+  isTablet: boolean = false
+
+  @HostListener("window.resize", ["$event.target.innerWidth"])
+
 
   ngOnInit() {
     this.loadData();
@@ -72,9 +78,14 @@ export class TableComponent implements OnInit {
         })
       })
     })
-    this.data.totalLength.set(this.dataSource.data.length)
+    this.data.totalLength.set(this.dataSource.data.length);
+    this.onResize(window.innerWidth);
   }
 
+  onResize(width: number) {
+    this.isTablet = width < this.width
+    console.log(window.innerWidth)
+  }
 
   loadData() {
     this.http.getData().subscribe((data: Data) => {
