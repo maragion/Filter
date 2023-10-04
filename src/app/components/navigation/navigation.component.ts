@@ -10,7 +10,7 @@ export class NavigationComponent {
   }
 
 
-  isOpened: boolean = true;
+  isDesktop: boolean = true;
   width: number = 1200;
   sideNavState = true
   isMobile = false
@@ -22,7 +22,7 @@ export class NavigationComponent {
   @HostListener('window:resize', ['$event.target.innerWidth'])
 
   onResize(width: number) {
-    this.isOpened = width >= this.width;
+    this.isDesktop = width >= this.width;
     this.sideNavState = width >= this.width;
     this.isMobile = width <= 540;
   }
