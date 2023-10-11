@@ -1,0 +1,19 @@
+.back {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+  color: #666F78;
+}
+
+h2 {
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.25rem;
+}
+
+/*# sourceMappingURL=accounts.component.css.map */

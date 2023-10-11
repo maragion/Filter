@@ -1,0 +1,179 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@include mat.core();
+
+@font-face {
+  font-family: "Moscow Sans";
+  src: url("./assets/fonts/MoscowSans-Regular.ttf");
+}
+
+$md-mcgpalette0: (
+  50 : #fbe4e6,
+  100 : #f4bcc2,
+  200 : #ed9099,
+  300 : #e56370,
+  400 : #e04151,
+  500 : #da2032,
+  600 : #d61c2d,
+  700 : #d01826,
+  800 : #cb131f,
+  900 : #c20b13,
+  A100 : #ffeeee,
+  A200 : #ffbbbd,
+  A400 : #ff888b,
+  A700 : #ff6e72,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$md-mcgpalette1: (
+  50 : #edeeef,
+  100 : #d1d4d7,
+  200 : #b3b7bc,
+  300 : #949aa1,
+  400 : #7d858c,
+  500 : #666f78,
+  600 : #5e6770,
+  700 : #535c65,
+  800 : #49525b,
+  900 : #384048,
+  A100 : #a0cffd,
+  A200 : #6eb5fd,
+  A400 : #389cff,
+  A700 : #1f8fff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #ffffff,
+  )
+);
+
+$typography-config: mat.define-typography-config(
+  $font-family: '"Moscow Sans"',
+  $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $headline-4: mat.define-typography-level(34px, 40px, 400),
+  $headline-5: mat.define-typography-level(24px, 32px, 400),
+  $headline-6: mat.define-typography-level(20px, 32px, 400),
+  $subtitle-1: mat.define-typography-level(16px, 28px, 400),
+  $body-1: mat.define-typography-level(14px, 20px, 400),
+  $body-2: mat.define-typography-level(14px, 20px, 400),
+  $subtitle-2: mat.define-typography-level(14px, 28px, 400),
+  $caption: mat.define-typography-level(12px, 20px, 400),
+  $button: mat.define-typography-level(14px, 24px, 300),
+);
+
+$my-primary: mat.define-palette($md-mcgpalette0, 500);
+$my-accent: mat.define-palette($md-mcgpalette1, 50, 300);
+
+
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+  ),
+  typography: $typography-config,
+  density: 0,
+));
+
+@include mat.all-component-themes($my-theme);
+@include mat.typography-hierarchy($my-theme);
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Moscow Sans", sans-serif;
+  background-color: #F5F6F7;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 1.5rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  gap: 1.5rem;
+
+  &_wrap {
+    flex-wrap: wrap;
+  }
+}
+
+.jc-sb {
+  justify-content: space-between;
+}
+
+.green {
+  color: rgba(37, 181, 83, 1);
+}
+
+.red {
+  color: rgba(255, 0, 31, 1);
+}
+
+.gray {
+  color: #666F78;
+}
+
+.mdc-button {
+  min-height: 2.8rem;
+  border-radius: 50%;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    padding: 2rem 2.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 2rem 2.4rem;
+  }
+}
+
+
+@media (max-width: 540px) {
+  .wrapper {
+    padding: 1rem 0;
+  }
+}

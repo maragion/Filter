@@ -1,0 +1,60 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@font-face {
+  font-family: "Moscow Sans";
+  src: url("./assets/fonts/MoscowSans-Regular.ttf");
+}
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Moscow Sans", sans-serif;
+  background-color: #F5F6F7;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 1.5rem;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  gap: 1.5rem;
+}
+.container_wrap {
+  flex-wrap: wrap;
+}
+
+.jc-sb {
+  justify-content: space-between;
+}
+
+.custom-button {
+  padding: 1rem 0.1rem;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 300;
+}
+
+.green {
+  color: rgb(37, 181, 83);
+}
+
+.red {
+  color: rgb(255, 0, 31);
+}
+
+.gray {
+  color: #666F78;
+}
+
+.button-gray {
+  background-color: #666F78;
+}
+
+/*# sourceMappingURL=styles.css.map */

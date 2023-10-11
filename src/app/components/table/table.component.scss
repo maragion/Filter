@@ -1,0 +1,272 @@
+.table {
+  background: #FFF;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.05);
+  display: flex;
+  margin-top: 2rem;
+  flex-direction: column;
+
+  &__header {
+    background: #DA2032;
+    color: #FFFFFF;
+  }
+
+  &__row {
+    text-align: center;
+  }
+
+  &__action-btn {
+    color: rgba(40, 40, 40, 1);
+    border-radius: 50%;
+    height: 2.2rem;
+    width: 2.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+    border: none;
+
+    &:hover {
+      background-color: #d3d6d7;
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+.paginator {
+  display: flex;
+  padding: 1.5rem 4.5rem;
+  gap: 2.69rem;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.125rem;
+  flex-wrap: wrap;
+  position: relative;
+
+  &__item-container {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  &__records {
+    margin-left: .5rem;
+    color: #666F78;
+  }
+}
+
+.customSelect {
+  position: relative;
+  min-width: 4.0625rem;
+  height: 1.5rem;
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(130, 140, 150, 0.40);
+  overflow: hidden;
+  background: url("data:image/svg+xml,%3Csvg width='18' height='18' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M5 7H12L8.5 11L5 7Z' fill='%23CBCDD2'/%3E%3C/svg%3E%0A") no-repeat center right;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 29.5%;
+    width: 1px;
+    height: 1.5rem;
+    display: block;
+    background-color: rgba(130, 140, 150, 0.40);
+  }
+
+  & select {
+    background: transparent;
+    -webkit-appearance: none;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    padding: .12rem .6rem;
+    font-family: Moscow Sans, serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.125rem;
+    color: #282828;
+  }
+
+  &_clear {
+    &::before {
+      content: "";
+      background: transparent;
+    }
+  }
+}
+
+.spiner {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selected {
+  color: #666F78;
+}
+
+.top-border {
+  border-top: 0.08rem solid rgba(196, 196, 196, .6);
+}
+
+
+mat-cell, mat-header-cell {
+  justify-content: center;
+  align-items: center;
+  padding: 0 .75rem;
+  box-sizing: border-box;
+  text-align: center;
+
+}
+
+mat-cell:first-of-type, mat-header-cell:first-of-type {
+  max-width: 7rem;
+}
+
+mat-cell:last-of-type, mat-header-cell:last-of-type {
+  max-width: 7rem;
+  text-align: center;
+
+}
+
+mat-row {
+  flex-wrap: wrap;
+}
+
+.mobile-header {
+  display: none;
+}
+
+@media (min-width: 1400px) {
+  mat-cell, mat-header-cell {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1024px) {
+  .paginator {
+    min-height: 5.62rem;
+    box-sizing: border-box;
+    gap: 1rem;
+  }
+
+  .selected {
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .selected {
+    position: static;
+  }
+
+  .mobile-header {
+    display: block;
+    min-width: 50%;
+    justify-self: flex-start;
+    color: #282828;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.125rem;
+  }
+
+  mat-table span {
+    display: inline-block;
+  }
+
+  mat-header-row {
+    display: none;
+  }
+
+  mat-row {
+    max-height: 17.5rem;
+    margin-top: .5rem;
+    border-top: 0.0625rem solid #C4C4C4;
+  }
+
+  mat-cell {
+    justify-content: flex-start;
+    padding-left: 3rem;
+    min-width: 50%;
+    max-width: 50%;
+
+
+    &:nth-child(odd) {
+      border-right: 1px solid #C4C4C4;
+    }
+
+    & span {
+      display: block;
+      text-align: left;
+    }
+
+    &:first-of-type {
+      padding-left: 3rem;
+    }
+  }
+
+  .mdc-data-table__row:last-child .mat-mdc-cell {
+    border-bottom: 1px solid rgba(196, 196, 196, 0.5);
+  }
+}
+
+@media (max-width: 600px) {
+  .paginator {
+    padding: 1rem .5rem 3.88rem;
+    min-height: max-content;
+    gap: 1rem;
+  }
+
+  mat-row {
+    margin-top: .56rem;
+    max-height: none;
+  }
+
+  mat-table {
+    height: max-content;
+  }
+
+  mat-cell {
+    justify-content: flex-start;
+    padding-left: 2.5rem;
+    min-width: 100%;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      height: 100%;
+      width: 0.0625rem;
+      background: #C4C4C4;
+    }
+
+    &:nth-child(odd) {
+      border-right: none;
+    }
+
+    &:first-of-type {
+      padding-left: 2.5rem;
+    }
+  }
+
+  .mobile-header {
+    min-width: 55%;
+  }
+}
+
+
+
+

@@ -1,0 +1,174 @@
+<div class="table" *ngIf="ready">
+
+  <div class="paginator">
+    <div class="paginator__item-container container_wrap">
+      <label for="show">Отображать </label>
+      <div class="customSelect">
+        <select id="show" name="show" [(ngModel)]="recordsToShow">
+          <option *ngFor="let value of showRecordsValue">{{value}}</option>
+        </select>
+      </div>
+      <span> записей</span>
+      <span class="paginator__records">1 - {{recordsToShow}} из {{allRecords}}</span>
+    </div>
+
+    <div class="paginator__item-container">
+      <span class="selected">Колличество выбранных записей: {{selectedRecords}}</span>
+    </div>
+
+    <div class="paginator__item-container" *ngIf="isTablet">
+      <label for="show">Сортировать по: </label>
+      <div class="customSelect customSelect_clear">
+        <select name="sortSelect" id="sortSelect" [(ngModel)]="sortingValue" (ngModelChange)="sortTable()">
+          <option *ngFor="let option of sortingOptions" value="{{option.name}}">{{option.value}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <mat-table [dataSource]="dataSource.data | slice:0:recordsToShow">
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Действия</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Действия</span>
+        <button class="table__action-btn">
+          <mat-icon>more_horiz</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell class="table__header" *matHeaderCellDef="let user">
+        <mat-checkbox color="accent" (change)="$event ? toggleAllRows() : null; selectAll($event)"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+        >
+        </mat-checkbox>
+        <span class="login-span">
+          Логин
+        </span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Логин</span>
+
+        <span>
+          <mat-checkbox color="accent" (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(user) : null; selectUser($event, user)"
+                        [checked]="selection.isSelected(user)"
+          >
+        </mat-checkbox>
+        </span>
+        <span>{{user.name}}</span>
+
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell class="table__header" *matHeaderCellDef> E-mail</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">E-mail</span>
+        {{user.email}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <mat-header-cell class="table__header" *matHeaderCellDef> Телефон</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Телефон</span>
+        {{user.phone | mask: '+0(000) 000-00-00'}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="is_admin">
+      <mat-header-cell *matHeaderCellDef> Роли</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Роль</span>
+
+        <span *ngIf="user.is_admin">Администратор</span>
+        <span *ngIf="!user.is_admin">Пользователь</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="update_at">
+      <mat-header-cell *matHeaderCellDef> Дата изменения</mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header"> Дата изменения</span>
+
+        {{user.update_at}}
+      </mat-cell>
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="create_at">
+      <mat-header-cell *matHeaderCellDef> Дата создания</mat-header-cell>
+      >
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header"> Дата создания</span>
+        {{user.create_at}}
+      </mat-cell>
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Статус</mat-header-cell>
+      >
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Статус</span>
+        <span *ngIf="user.status === 'ACTIVE'" class="green">Активен</span>
+        <span *ngIf="user.status === 'BLOCKED'" class="red">Заблокирован</span>
+      </mat-cell>
+      >
+    </ng-container>
+
+    <ng-container matColumnDef="is_ecp">
+      <mat-header-cell *matHeaderCellDef> Наличие ЭП</mat-header-cell>
+      >
+      <mat-cell *matCellDef="let user">
+        <span class="mobile-header">Наличие ЭП</span>
+        <mat-icon *ngIf="user.is_ecp" class="green">check_circle</mat-icon>
+        <mat-icon class="red" *ngIf="!user.is_ecp">cancel</mat-icon>
+      </mat-cell>
+      >
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="table__header"></mat-header-row>
+    >
+    <mat-row *matRowDef="let user; let id; columns: displayedColumns;" class="table__row"
+             (click)="selection.toggle(user)"></mat-row>
+    >
+  </mat-table>
+
+  <div class="paginator top-border">
+    <div class="paginator__item-container">
+      <label for="show">Отображать </label>
+      <div class="customSelect">
+        <select id="show2" name="show" [(ngModel)]="recordsToShow">
+          <option *ngFor="let value of showRecordsValue">{{value}}</option>
+        </select>
+      </div>
+      <span> записей</span>
+      <span class="paginator__records">1 - {{recordsToShow}} из {{allRecords}}</span>
+    </div>
+
+    <div class="paginator__item-container">
+      <span class="selected">Колличество выбранных записей: {{selectedRecords}}</span>
+    </div>
+
+    <div class="paginator__item-container" *ngIf="isTablet">
+      <label for="show">Сортировать по: </label>
+      <div class="customSelect customSelect_clear">
+        <select name="sortSelect" id="sortSelect2" [(ngModel)]="sortingValue" (ngModelChange)="sortTable()">
+          <option *ngFor="let option of sortingOptions" value="{{option.name}}">{{option.value}}</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="spiner">
+  <mat-spinner color="primary" *ngIf="!ready"></mat-spinner>
+</div>

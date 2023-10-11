@@ -1,0 +1,82 @@
+<form class="form" [formGroup]="filterForm">
+  <h3>Фильтр</h3>
+
+  <div class="form__inputs-container container container_wrap">
+
+    <div class="form__input-container">
+      <label for="name">Логин</label>
+      <div class="input">
+        <input placeholder="" type="text" id="name" name="name" formControlName="name">
+        <button class="clear" (click)="clearField('name')">
+          <mat-icon class="cancel">cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="form__input-container">
+      <label for="phone">Телефон</label>
+      <div class="input">
+        <input type="tel" placeholder="+7(123)-456-78-90" id="phone" name="phone" formControlName="phone"
+               mask="+0(000)-000-00-00">
+        <button class="clear" (click)="clearField('phone')">
+          <mat-icon class="cancel">cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="form__input-container">
+      <label for="create_at">Дата создания</label>
+      <div class="input date">
+        <input placeholder="" class="date-input" type="date" id="create_at" name="create_at"
+               formControlName="create_at">
+      </div>
+    </div>
+
+    <div class="form__input-container">
+      <label for="status">Статус</label>
+      <div class="input">
+        <select id="status" name="status" class="select" formControlName="status">
+          <option value="all">Все</option>
+          <option value="ACTIVE">Активен</option>
+          <option value="BLOCKED">Заблокирован</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form__input-container">
+      <label for="email">E-mail</label>
+      <div class="input">
+        <input type="email" placeholder="" id="email" name="email" formControlName="email">
+        <button class="clear" (click)="clearField('email')">
+          <mat-icon class="cancel">cancel</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="form__input-container">
+      <label for="is_admin">Роль</label>
+      <div class="input">
+        <select id="is_admin" name="is_admin" class="select" formControlName="is_admin">
+          <option value="all">Все</option>
+          <option [ngValue]=false>Пользователь</option>
+          <option [ngValue]=true>Администратор</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form__input-container">
+      <label for="update_at">Дата изменения</label>
+      <div class="input date">
+        <input placeholder="" class="date-input" type="date" id="update_at" name="update_at"
+               formControlName="update_at">
+      </div>
+    </div>
+
+    <div class="container container_wrap buttons">
+      <button mat-flat-button color="primary" class="filter-button" (click)="applyFilters()">Применить</button>
+      <button mat-flat-button color="accent" class="filter-button" (click)="changeFilterState()">Отмена</button>
+      <button mat-flat-button color="accent" class="filter-button" (click)="resetFilters()">Сбросить</button>
+    </div>
+  </div>
+
+</form>
